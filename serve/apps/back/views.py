@@ -270,3 +270,18 @@ def rank_data():
         {"name": "章医生", "count": 871},
     ]
     return jsonify({"datas": data})
+
+
+@bp.route('/distributed_data', methods=['GET'])
+def distributed_data():
+    data = {
+        "code": 72,
+        "msg": "labore incididunt laborum Duis tempor",
+        "datas": {
+            "consultation_count": 10,
+            "disease_count": 10,
+            "department_max_count": 6,
+            "department_min_count": 6
+        }
+    }
+    return jsonify({"datas": data})
