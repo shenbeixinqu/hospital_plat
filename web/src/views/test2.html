@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Flexbox Layout</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+    }
+    .left {
+      width: 66%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .left-item {
+      width: calc(50% - 80px);
+      height: 35%;
+    }
+    .right-item {
+      height: calc(70% + 80px);
+    }
+    .right {
+      width: 33%;
+    }
+    .item {
+      margin: 40px;
+      padding: 20px;
+      box-sizing: border-box; /* 确保内边距和边框不会增加宽度 */
+      background-color: #f2f2f2; /* 设置背景颜色 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="item left-item A">A</div>
+      <div class="item left-item B">B</div>
+      <div class="item left-item D">D</div>
+      <div class="item left-item E">E</div>
+      <div class="item left-item F">F</div>
+      <div class="item left-item G">G</div>
+    </div>
+    <div class="right">
+      <div class="item right-item D">D</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+{
+  "id": "4559877",
+  "name": "hospital",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2316769",
+      "name": "银牌",
+      "font_class": "yinpai",
+      "unicode": "e706",
+      "unicode_decimal": 59142
+    },
+    {
+      "icon_id": "5362838",
+      "name": "金牌",
+      "font_class": "jinpai",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8326138",
+      "name": "铜牌",
+      "font_class": "tongpai",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "16606119",
+      "name": "5",
+      "font_class": "5",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "16606121",
+      "name": "6",
+      "font_class": "6",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "16606123",
+      "name": "7",
+      "font_class": "7",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "16606115",
+      "name": "4",
+      "font_class": "weibiaoti-1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    }
+  ]
+}
