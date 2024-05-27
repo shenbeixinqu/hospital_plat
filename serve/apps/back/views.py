@@ -286,3 +286,50 @@ def distributed_data():
 @bp.route('/distributed_apply', methods=['POST'])
 def distributed_apply():
     return jsonify({"code": 201, "msg": "success"})
+
+
+@bp.route('/warning_data', methods=['GET'])
+def warning_data():
+    data = {
+        "admission_count": 110,
+        "retreat_count": 110,
+        "department_max_count": 7
+    }
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/warning_apply', methods=['POST'])
+def warning_apply():
+    return jsonify({"code": 200, "msg": "success"})
+
+
+@bp.route('/stop_lock_data', methods=['GET'])
+def stop_lock_data():
+    data = {
+        "if_switch": True,
+        "error_one": 5,
+        "lock_minute": 30,
+        "error_two": 10,
+        "not_login_day": 90
+    }
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/stop_lock_apply', methods=['POST'])
+def stop_lock_apply():
+    return jsonify({"code": 200, "msg": "success"})
+
+
+@bp.route('/auto_logout_data', methods=['GET'])
+def auto_logout_data():
+    data = {
+        "if_switch": True,
+        "not_operate_minute": 10
+    }
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/auto_logout_apply', methods=['POST'])
+def auto_logout_apply():
+    return jsonify({"code": 200, "msg": "success"})
+

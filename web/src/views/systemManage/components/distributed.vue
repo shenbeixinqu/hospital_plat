@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { distributedData, distributedApply} from '@/api/system'
+import { distributedData, distributedApply} from '@/api/system/screen'
 export default {
   created() {
     this.getDistributedData()
@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       form: {
-        consultation_count: '',
       },
       resetData: [10, 10, 6, 6],
       rules: {

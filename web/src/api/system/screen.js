@@ -16,3 +16,18 @@ export function distributedApply(data) {
     data
   })
 }
+
+export function warningData() {
+  return request({
+    url: "/warning_data",
+    method: "GET"
+  })
+}
+
+export function warningApply(data) {
+  return request({
+    url: "/warning_apply",
+    method: "POST",
+    data
+  })
+}
