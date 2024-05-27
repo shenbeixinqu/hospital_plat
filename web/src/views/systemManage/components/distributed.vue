@@ -3,7 +3,7 @@
     <el-form-item label="患者就诊省份显示数量" prop="consultation_count">
       <el-input
         class="form-length"
-        v-model.number="form.consultation_count"
+        v-model="form.consultation_count"
         placeholder="请输入10-12的整数"
         clearable
       />
@@ -33,18 +33,24 @@
       />
     </el-form-item>
     <el-form-item class="form-button">
-      <el-button type="primary" size="small">应用</el-button>
-      <el-button size="small">恢复默认设置</el-button>
+      <el-button type="primary" size="small" @click="formApply">应用</el-button>
+      <el-button size="small" @click="formReset">恢复默认设置</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+import { distributedData, distributedApply} from '@/api/system'
 export default {
+  created() {
+    this.getDistributedData()
+  },
   data() {
     return {
       form: {
+        consultation_count: '',
       },
+      resetData: [10, 10, 6, 6],
       rules: {
         consultation_count: [
           { required: true, validator: this.validateIntegerInRangeTen, trigger: 'blur' }
@@ -65,7 +71,6 @@ export default {
     // 自定义验证函数
     validateIntegerInRangeTen(rule, value, callback) {
       const num = Number(value);
-      console.log("num", num, typeof(num))
       if (!Number.isInteger(num) || num < 10 || num > 12) {
         callback(new Error('请输入10到12之间的整数'));
       } else {
@@ -74,7 +79,6 @@ export default {
     },
     validateIntegerInRangeSix(rule, value, callback) {
       const num = Number(value);
-      console.log("num", num, typeof(num))
       if (!Number.isInteger(num) || num < 6 || num > 8) {
         callback(new Error('请输入6到8之间的整数'));
       } else {
@@ -83,13 +87,54 @@ export default {
     },
     validateIntegerInRangeFour(rule, value, callback) {
       const num = Number(value);
-      console.log("num", num, typeof(num))
       if (!Number.isInteger(num) || num < 4 || num > 6) {
         callback(new Error('请输入4到6之间的整数'));
       } else {
         callback();
       }
     },
+    // 获取初始数据
+    getDistributedData() {
+      distributedData().then(res => {
+        if (res.code === 200) {
+          this.form = res.datas
+        } else {
+          this.$message({
+            type: "error",
+            message: res,
+          });
+        }
+      })
+    },
+    // 应用
+    formApply() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          distributedApply(this.form).then(res => {
+            if (res.code === 200) {
+              this.$message({
+                type: "success",
+                message: res.msg
+              })
+            } else {
+              this.$message({
+                type: "error",
+                message: res
+              })
+            }
+          })
+        }
+      })
+    },
+    // 恢复默认设置
+    formReset() {
+      this.form = {
+        consultation_count: this.resetData[0],
+        disease_count: this.resetData[1],
+        department_max_count: this.resetData[2],
+        department_min_count: this.resetData[3]
+      }
+    }
   }
 }
 </script>

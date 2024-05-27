@@ -81,17 +81,21 @@ const handleData = async ({ config, data, status, statusText }) => {
       break;
   }
   // todo
-  const errMsg = `${config.url} 后端接口 ${code} 异常：${
+  // const errMsg = `${config.url} 后端接口 ${code} 异常：${
+  //   data && data[messageName]
+  //     ? data[messageName]
+  //     : CODE_MESSAGE[code]
+  //     ? CODE_MESSAGE[code]
+  //     : statusText
+  // }`;
+  const errMsg = `后端接口 异常 ${code}：${
     data && data[messageName]
       ? data[messageName]
       : CODE_MESSAGE[code]
       ? CODE_MESSAGE[code]
       : statusText
   }`;
-  this.$message({
-    type: "error",
-    msg: errMsg,
-  });
+  return errMsg
 };
 
 /**

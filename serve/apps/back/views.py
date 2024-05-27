@@ -275,13 +275,14 @@ def rank_data():
 @bp.route('/distributed_data', methods=['GET'])
 def distributed_data():
     data = {
-        "code": 72,
-        "msg": "labore incididunt laborum Duis tempor",
-        "datas": {
-            "consultation_count": 10,
-            "disease_count": 10,
-            "department_max_count": 6,
-            "department_min_count": 6
-        }
+        "consultation_count": 9,
+        "disease_count": 10,
+        "department_max_count": 7,
+        "department_min_count": 6
     }
-    return jsonify({"datas": data})
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/distributed_apply', methods=['POST'])
+def distributed_apply():
+    return jsonify({"code": 201, "msg": "success"})
