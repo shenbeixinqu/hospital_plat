@@ -1,0 +1,80 @@
+.colorDeepskyblue {
+  color: deepskyblue;
+}
+
+
+.screen-font-bold {
+  font-weight: bold;
+}
+
+.screen-index {
+  color: #000207;
+  width: 100%;
+  height: 100%;
+  background: url('../bg_image/pageBg.png') center center no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  overflow: hidden;
+}
+
+/* 总体布局 */
+.screen-body {
+  /* 头部布局 */
+  .header {
+    // DataV边框10宽度左侧和高度设置
+    .dv-dec-10-left {
+      width: 25%;
+      margin-top: 0.5%;
+      margin-left: 0.2%;
+      height: 8px;
+      float: left;
+    }
+
+    // DataV边框10宽度右侧和高度设置
+    .dv-dec-10-right {
+      width: 25%;
+      margin-top: 0.5%;
+      margin-left: 0.2%;
+      height: 8px;
+      float: right;
+      // 边框翻转
+      transform: rotateY(180deg);
+    }
+
+    // DataV边框8左侧宽度和高度设置
+    .dv-dec-8-left {
+      width: 18%;
+      height: 6%;
+      margin-top: 0.7%;
+      position: absolute;
+      left: 25%;
+    }
+
+    // DataV边框8宽度右侧和高度设置
+    .dv-dec-8-right {
+      width: 18%;
+      height: 6%;
+      margin-top: 0.7%;
+      position: absolute;
+      right: 25%;
+    }
+    // 标题自定义修改
+    .title {
+      position: absolute;
+      left: 45%;
+      margin-top: 0.8%;
+    }
+  }
+
+  /*layout 布局*/
+  .screen-layout {
+    position: absolute;
+    min-width: 1000px;
+    min-height: 600px;
+    top: 7%;
+    width: 100%;
+    height: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
+  }  
+}

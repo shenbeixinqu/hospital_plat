@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "@/uni/layouts";
+import systemRouter from './modules/systemManage'
+import screenRouter from "./modules/screen";
 import { publicPath, routerMode } from "@/config";
 Vue.use(VueRouter);
 
@@ -42,40 +44,8 @@ export const asyncRoutes = [
       },
     ],
   },
-  {
-    path: "/systemManage",
-    name: "systemManage",
-    component: Layout,
-    meta: {
-      title: "系统管理"
-    },
-    children: [
-      {
-        path: "ScreenSetting",
-        name: "ScreenSetting",
-        component: () => import("@/views/systemManage/ScreenSetting"),
-        meta: {
-          title: "大屏设置"
-        }
-      },
-      {
-        path: "SecurityManage",
-        name: "SecurityManage",
-        component: () => import("@/views/systemManage/SecurityManage"),
-        meta: {
-          title: "安全管理"
-        }
-      },
-      {
-        path: "AutomaticSetting",
-        name: "AutomaticSetting",
-        component: () => import("@/views/systemManage/AutomaticSetting"),
-        meta: {
-          title: "业务报告自动生成设置"
-        }
-      }
-    ]
-  }
+  systemRouter,
+  screenRouter
 ];
 
 const router = createRouter();
