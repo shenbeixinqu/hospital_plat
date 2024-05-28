@@ -1,50 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flex Layout with Special Last Column</title>
-<style>
-  .grid-container {
-    display: flex; /* 使用flex布局 */
-    flex-wrap: wrap; /* 允许换行 */
-    margin: -10px; /* 抵消第一层flex-item的外边距 */
-  }
-  .grid-row {
-    display: flex; /* 每一行也是一个flex容器 */
-    width: 100%; /* 确保每一行占满容器宽度 */
-    margin: 10px 0; /* 上下外边距，左边距和右边距被grid-container的外边距抵消 */
-  }
-  .grid-item {
-    width: calc(33.333% - 80px); /* 设置列的宽度，减去外边距 */
-    margin: 40px; /* 设置外边距 */
-    padding: 20px; /* 设置内边距 */
-    background-color: #f2f2f2; /* 设置背景颜色 */
-    box-sizing: border-box; /* 确保内边距和边框不会增加宽度 */
-  }
-  .grid-item:nth-child(3n) {
-    flex-grow: 1; /* 第三列的flex-grow设置为2，使其占据前两列的两倍空间 */
-  }
-  
-</style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-
-<div class="grid-container">
-  <div class="grid-row">
-    <div class="grid-item">1</div>
-    <div class="grid-item">2</div>
-    <div class="grid-item">3</div>
-  </div>
-  <div class="grid-row">
-    <div class="grid-item">4</div>
-    <div class="grid-item">5</div>
-  </div>
-  <div class="grid-row">
-    <div class="grid-item">7</div>
-    <div class="grid-item">8</div>
-  </div>
-</div>
-
+  <script>
+    const num = Number(0)
+    console.log("num", num)
+    const res = !Number.isInteger(num)
+    console.log("res", res)
+    const num1 = Number(1)
+    const res1 = !Number.isInteger(num1)
+    console.log("Res1", res1)
+  </script>
 </body>
 </html>

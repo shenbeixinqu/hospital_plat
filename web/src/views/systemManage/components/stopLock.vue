@@ -4,7 +4,9 @@
       <el-switch
         v-model="form.if_switch"
         active-color="#1890ff"
+        @change="switchChange"
       />
+      <div class="desc">开启后用户在登录连续失败时将被限制登录</div>
     </el-form-item>
     <template v-if="form.if_switch">
       <el-form-item label="认证错误锁定" prop="group">
@@ -54,12 +56,12 @@ export default {
         group: [
           {
             validator: (rule, value, callback) => {
-              if (!Number.isInteger(Number(this.form.error_one)) || this.form.error_one < 5 || this.form.error_one > 10) {
-                callback(new Error('请输入5到10之间的整数'))
-              } else if (!Number.isInteger(Number(this.form.lock_minute)) || this.form.lock_minute < 10 || this.form.lock_minute > 200) {
-                callback(new Error('请输入10到200之间的整数'))
-              } else if (!Number.isInteger(Number(this.form.error_two)) || this.form.error_two < 10 || this.form.error_two > 20) {
-                callback(new Error('请输入10到20之间的整数'))
+              if (!Number.isInteger(Number(this.form.error_one)) || this.form.error_one < 0 || this.form.error_one > 10) {
+                callback(new Error('请输入0到10之间的整数'))
+              } else if (!Number.isInteger(Number(this.form.lock_minute)) || this.form.lock_minute < 0 || this.form.lock_minute > 200) {
+                callback(new Error('请输入0到200之间的整数'))
+              } else if (!Number.isInteger(Number(this.form.error_two)) || this.form.error_two < 0 || this.form.error_two > 20) {
+                callback(new Error('请输入0到20之间的整数'))
               } else {
                 callback()
               }
@@ -77,8 +79,8 @@ export default {
     // 自定义验证函数
     validateIntegerInRangeThirty(rule, value, callback) {
       const num = Number(value);
-      if (!Number.isInteger(num) || num < 30 || num > 100) {
-        callback(new Error('请输入30到100之间的整数'));
+      if (!Number.isInteger(num) || num < 0 || num > 30) {
+        callback(new Error('请输入0到30之间的整数'));
       } else {
         callback();
       }
@@ -96,24 +98,44 @@ export default {
         }
       })
     },
-    formApply() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          stopLockApply(this.form).then(res => {
-            if (res.code === 200) {
-              this.$message({
-                type: "success",
-                message: res.msg
-              })
-            } else {
-              this.$message({
-                type: "error",
-                message: res
-              })
-            }
+    // 开关切换
+    switchChange(val) {
+      if (val === false) {
+        this.form = {
+          if_switch: false,
+          error_one: 0,
+          lock_minute: 0,
+          error_two: 0,
+          not_login_day: 0
+        }
+        this.formApply('switch')
+      }
+    },
+    getApplyMessage() {
+      stopLockApply(this.form).then(res => {
+        if (res.code === 200) {
+          this.$message({
+            type: "success",
+            message: res.msg
+          })
+        } else {
+          this.$message({
+            type: "error",
+            message: res
           })
         }
       })
+    },
+    formApply(params) {
+      if (params) {
+        this.getApplyMessage()
+      } else {
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            this.getApplyMessage()
+          }
+        })
+      }
     }
   }
 }

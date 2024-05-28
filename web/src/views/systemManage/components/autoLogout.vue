@@ -4,6 +4,7 @@
       <el-switch 
         v-model="form.if_switch"
         active-color="#1890ff"
+        @change="switchChange"
       />
       <div class="desc">开启后用户长时间不操作平台,会自动登出账号</div>
     </el-form-item>
@@ -47,8 +48,8 @@ export default {
     // 自定义验证函数
     validateIntegerInRangeTen(rule, value, callback) {
       const num = Number(value);
-      if (!Number.isInteger(num) || num < 10 || num > 100) {
-        callback(new Error('请输入10到100之间的整数'));
+      if (!Number.isInteger(num) || num < 0 || num > 10) {
+        callback(new Error('请输入0到10之间的整数'));
       } else {
         callback();
       }
@@ -65,6 +66,16 @@ export default {
           })
         }
       })
+    },
+    // 开关切换
+    switchChange(val) {
+      if (val === false) {
+        this.form = {
+          if_switch: false,
+          not_operate_minute: 0
+        }
+        this.formApply()
+      }
     },
     formApply() {
       this.$refs.form.validate(valid => {

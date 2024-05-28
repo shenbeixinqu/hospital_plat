@@ -44,7 +44,6 @@ export default {
     },
     async logout() {
       await this._logout();
-      console.log("9999");
       console.log(toLoginRoute(this.$route.path));
       await this.$router.push(toLoginRoute(this.$route.path));
     },

@@ -333,3 +333,37 @@ def auto_logout_data():
 def auto_logout_apply():
     return jsonify({"code": 200, "msg": "success"})
 
+
+@bp.route('/month_report_data', methods=['GET'])
+def month_report_data():
+    data = {
+        "if_switch": True,
+        "person_report_date": 15,
+        "department_report_date": 16,
+        "all_report_date": 9
+    }
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/month_report_apply', methods=['POST'])
+def month_report_apply():
+    return jsonify({"code": 200, "msg": "success"})
+
+
+@bp.route('/year_report_data', methods=['GET'])
+def year_report_data():
+    data = {
+        "if_switch": True,
+        "person_report_month": 4,
+        "person_report_day": 21,
+        "department_report_month": 3,
+        "department_report_day": 30,
+        "all_report_month": 8,
+        "all_report_day": 16
+    }
+    return jsonify({"datas": data, "code": 200, "msg": "success"})
+
+
+@bp.route('/year_report_apply', methods=['POST'])
+def year_report_apply():
+    return jsonify({"code": 200, "msg": "success"})
