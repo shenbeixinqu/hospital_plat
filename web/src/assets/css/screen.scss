@@ -17,6 +17,22 @@
   overflow: hidden;
 }
 
+.screen-padding {
+  padding: 6px;
+}
+.screen-padding-bottom {
+  padding-bottom: 6px;
+}
+.screen-padding-top {
+  padding-bottom: 6px;
+}
+
+.screen-line {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
 /* 总体布局 */
 .screen-body {
   /* 头部布局 */

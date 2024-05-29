@@ -1,5 +1,5 @@
 <template>
-  <div style="color: #fff">右下</div>
+  <div style="color: #fff">右二</div>
 </template>
 
 <script>

@@ -18,48 +18,46 @@
       <!-- 第二部分 布局 start -->
       <div class="screen-layout">
         <el-row>
-          <el-col :span="5">
+          <el-col :span="5" class="screen-padding">
             <div :style="{ height: chartOne + 'px'}">
-              <dv-border-box-9 style="padding:12px">
-                <left-top-chart />
-              </dv-border-box-9>
+              <left-top-chart :chartLeftOne="chartLeftOne" :chartLeftTwo="chartLeftTwo" />
             </div>
           </el-col>
-          <el-col :span="14">
+          <el-col :span="14" class="screen-padding">
             <div :style="{ height: chartTwo + 'px'}">
-              <dv-border-box-12 style="padding:12px">
+              <dv-border-box-10>
                 <center-top-chart />
-              </dv-border-box-12>
+              </dv-border-box-10>
             </div>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="5" class="screen-padding">
             <div :style="{ height: chartThree + 'px'}">
-              <dv-border-box-9 style="padding:12px">
-                <right-top-chart />
-              </dv-border-box-9>
+              <div>
+                <right-top-chart :chartRightOne="chartRightOne" :chartRightTwo="chartRightTwo" />
+              </div>
             </div>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="8">
+          <el-col :span="8" class="screen-padding">
             <div :style="{ height: chartFour + 'px'}">
-              <dv-border-box-9 style="padding:12px">
+              <dv-border-box-10>
                 <left-bottom-chart />
-              </dv-border-box-9>
+              </dv-border-box-10>
             </div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="8" class="screen-padding">
             <div :style="{ height: chartFive + 'px'}">
-              <dv-border-box-9 style="padding:12px">
+              <dv-border-box-10>
                 <center-bottom-chart />
-              </dv-border-box-9>
+              </dv-border-box-10>
             </div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="8" class="screen-padding">
             <div :style="{ height: chartSix + 'px'}">
-              <dv-border-box-9 style="padding:12px">
+              <dv-border-box-10>
                 <right-bottom-chart />
-              </dv-border-box-9>
+              </dv-border-box-10>
             </div>
           </el-col>
         </el-row>
@@ -86,13 +84,9 @@ export default {
     rightTopChart,
     rightBottomChart
   },
-  created() {
-    // window.addEventListener('resize',this.getScreenHeight, false);
-    // window.addEventListener('resize',this.getScreenWidth, false);
-  },
   mounted() {
     // 页面大小改变时触发
-    window.addEventListener('resize',this.getScreenHeight, false);
+    window.addEventListener('resize',this.getScreenHeight);
     window.addEventListener('resize',this.getScreenWidth, false);
     this.cancelLoading();
     this.resizeScreen();
@@ -109,19 +103,22 @@ export default {
       loading: true,
       decorationColor: ['#568aea', '#000000'],
       screenTime: null,
+      screenHeight: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
       screenWidth: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      // chartOne: 450,
-      // chartTwo: 200,
-      // chartThree: 450,
-      // chartFour: 200,
-      // chartFive: 200,
-      // chartSix: 200,
-      chartOne: 410,
-      chartTwo: 380,
-      chartThree: 410,
-      chartFour: 260,
-      chartFive: 260,
-      chartSix: 260,
+      // 首页6块
+      chartOne: 0,
+      chartTwo: 0,
+      chartThree: 0,
+      chartFour: 0,
+      chartFive: 0,
+      chartSix: 0,
+      // 左上两块
+      chartLeftOne: 0,
+      chartLeftTwo: 0,
+      // 右上两块
+      chartRightOne: 0,
+      chartRightTwo: 0
+
     }
   },
   methods: {
@@ -131,10 +128,8 @@ export default {
       }, 100)
     },
     resizeScreen() {
-      this.screenTime = setInterval(() => {
-        this.getScreenHeight();
-        this.getScreenWidth()
-      }, 200)
+      this.getScreenHeight();
+      this.getScreenWidth()
     },
     // 获取浏览器高度进行自适应
     getScreenHeight() {
@@ -142,9 +137,13 @@ export default {
       this.chartOne = Math.round(this.screenHeight * 0.55)
       this.chartTwo = Math.round(this.screenHeight * 0.55)
       this.chartThree = Math.round(this.screenHeight * 0.55)
-      this.chartFour = Math.round(this.screenHeight * 0.35)
-      this.chartFive = Math.round(this.screenHeight * 0.35)
-      this.chartSix = Math.round(this.screenHeight * 0.35)
+      this.chartFour = Math.round(this.screenHeight * 0.33)
+      this.chartFive = Math.round(this.screenHeight * 0.33)
+      this.chartSix = Math.round(this.screenHeight * 0.33)
+      this.chartLeftOne = Math.round(this.chartThree * 0.6)
+      this.chartLeftTwo = Math.round(this.chartThree * 0.4)
+      this.chartRightOne = Math.round(this.chartThree * 0.4)
+      this.chartRightTwo = Math.round(this.chartThree * 0.6)
     },
     // 字体大小根据宽度自适应
     getScreenWidth(){

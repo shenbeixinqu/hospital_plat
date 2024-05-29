@@ -1,5 +1,5 @@
 <template>
-  <div>中下</div>
+  <div style="color: #fff">中下</div>
 </template>
 
 <script>
