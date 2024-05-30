@@ -367,3 +367,12 @@ def year_report_data():
 @bp.route('/year_report_apply', methods=['POST'])
 def year_report_apply():
     return jsonify({"code": 200, "msg": "success"})
+
+
+@bp.route('/chart_right_top_two', methods=['GET'])
+def chart_right_top_two():
+    data = {
+        "disease_name": ["呼吸道感染", "高血压", "糖尿病", "支气管炎", "急性肠炎", "风湿"],
+        "disease_count": [933, 850, 723, 680, 500, 300],
+    }
+    return jsonify({"code": 200, "datas": data, "msg": "success"})

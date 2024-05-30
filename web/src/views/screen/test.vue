@@ -1,241 +1,175 @@
-<!--  -->
 <template>
-  <div id="index">   
-       <!--  DataV-Loading加载动画 -->
-       <dv-loading v-if="loading">Loading...</dv-loading>
-       <!-- 总体布局-start -->
-        <div v-else class="koi-body">
-          <!-- 第一部分-头部-start -->
-            <div class="header">
-              <!-- 首页 -->
-              <a class="homePage font-bold colorDeepskyblue" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}" href="http://www.baidu.com" target="_self">首页</a>
-              <!-- 时间 -->
-              <div class="localTime colorPink" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}">{{ dateYear }} {{ dateWeek }} {{ dateDay }}</div>
-              <!-- 装饰10 -->
-              <dv-decoration-10 class="dv-dec-10-left" />
-              <!-- 装饰8 -->
-              <dv-decoration-8 class="dv-dec-8-left" :color="decorationColor"/>
-              <!-- 标题 -->
-              <span class="title font-bold colorText" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}">分布式储能平台</span>
-              <!-- 装饰8 -->
-              <dv-decoration-8 class="dv-dec-8-right" :reverse="true" :color="decorationColor" />
-              <!-- 装饰10 -->
-              <dv-decoration-10 class="dv-dec-10-right"/>
-            </div>
-          <!-- 第一部分-头部-end -->
-         
-        <!-- 网格布局 grid -->
-        <!-- <div class="wrapper">
-          <div class="one item">One</div>
-          <div class="two item">Two</div>
-          <div class="three item">Three</div>
-          <div class="four item">Four</div>
-          <div class="five item">Five</div>
-          <div class="six item">Six</div>
-        </div> -->
-
-        <!-- 弹性布局 flex -->
-        <!-- <div class="container">
-          <div class="one item">One</div>
-          <div class="two item">Two</div>
-          <div class="three item">Three</div>
-          <div class="four item">Four</div>
-          <div class="five item">Five</div>
-          <div class="six item">Six</div>
-        </div> -->
-
-        <!-- Element-UI Layout布局 -->
-        <div class="layoutHome">
-          <el-row>
-            <el-col :span="6">
-              <div :style="{ height: kHOne + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <leftchart1></leftchart1>
-                </dv-border-box-12> 
-              </div>
-      
-              <div :style="{ height: kHTwo + 'px'}">
-                <!-- style="padding:12px" -->
-                <dv-border-box-12 style="padding:12px">
-                  <leftchart-2></leftchart-2>
-                </dv-border-box-12> 
-              </div>
-            </el-col>
-
-            <el-col :span="12"> 
-              <div :style="{ height: kHThree + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <center></center>
-                </dv-border-box-12> 
-              </div>
-              <div :style="{ height: kHFour + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <centerchart1></centerchart1>
-                </dv-border-box-12> 
-              </div>
-            </el-col>
-            
-            <el-col :span="6">
-              <div :style="{ height: kHFive + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <rightchart1></rightchart1>
-                </dv-border-box-12> 
-              </div>
-              <div :style="{ height: kHSix + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <rightchart2></rightchart2>
-                </dv-border-box-12> 
-              </div>
-              <div :style="{ height: kHSeven + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <rightchart3></rightchart3>
-                </dv-border-box-12> 
-              </div>              
-            </el-col>
-
-          </el-row>
-        </div>
-          <!-- 总体布局end -->
-        </div>
-   </div>
+  <div>
+    <div>
+      <!-- <span class="colorDeepskyblue" style="position: absolute; left: 10px;font-size: 10px;">时间：2022/07/01-2022/07/31</span>           -->
+      <div class="colorGrass font-bold" :style="{ 'font-size': kFOne + 'px' }">
+        🌈手游上线次数排行榜
+      </div>
+    </div>
+    <div>
+      <dv-capsule-chart
+        :config="config"
+        :style="{ width: kWOne + 'px', height: kHOne + 'px' }"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import { formatTime } from '../utils/index.js'
-import leftchart1 from "../components/ems/left/chart1.vue";
-import leftchart2 from "../components/ems/left/chart2.vue";
-import center from "../components/ems/center/center.vue";
-import centerchart1 from "../components/ems/center/chart1.vue";
-import rightchart1 from "../components/ems/right/chart1.vue";
-import rightchart2 from "../components/ems/right/chart2.vue";
-import rightchart3 from "../components/ems/right/chart3.vue";
+import { getSignData } from "../../../api/ems/index";
 export default {
-  name: 'index',
-  components: {
-    center,
-    leftchart1,
-    leftchart2,
-    centerchart1,
-    rightchart1,
-    rightchart2,
-    rightchart3
+  data() {
+    return {
+      // 获取浏览器可视区域高度（包含滚动条）、 window.innerHeight
+      // 获取浏览器可视区域高度（不包含工具栏高度）、document.documentElement.clientHeight
+      // 获取body的实际高度  (三个都是相同，兼容性不同的浏览器而设置的) document.body.clientHeight
+      screenHeight:
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight,
+      screenWidth:
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth,
+      chartInstance: null,
+      allData: [],
+      // 高度
+      kHOne: null,
+      // 宽度
+      kWOne: null,
+      // 标题字体
+      kFOne: null,
+      // 定时器监控
+      koiTime: null,
+      // 局部刷新定时器
+      koiTimer: null,
+      config: {
+        showValue: true,
+        unit: "次",
+        data: [
+          {
+            name: "王者荣耀",
+            value: 32,
+          },
+          {
+            name: "和平精英",
+            value: 30,
+          },
+          {
+            name: "QQ飞车",
+            value: 28,
+          },
+          {
+            name: "植物VS僵尸",
+            value: 26,
+          },
+          {
+            name: "天天酷跑",
+            value: 24,
+          },
+          {
+            name: "崩坏3",
+            value: 22,
+          },
+          {
+            name: "我的世界",
+            value: 20,
+          },
+          {
+            name: "第三人格",
+            value: 18,
+          },
+          {
+            name: "穿越火线",
+            value: 16,
+          },
+          {
+            name: "逆战",
+            value: 14,
+          },
+        ],
+      },
+    };
   },
-  data () {
-  return {
-    loading: true,
-    // 装饰8颜色
-    decorationColor: ['#568aea', '#000000'],
-    timer: null,
-    koiTime: null,
-    dateDay: null,
-    dateYear: null,
-    dateWeek: null,
-    weekday: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-    // 获取浏览器可视区域高度（包含滚动条）、
-    // 获取浏览器可视区域高度（不包含工具栏高度）、
-    // 获取body的实际高度  (三个都是相同，兼容性不同的浏览器而设置的)
-    screenHeight: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-    screenWidth: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-    kHOne: 200,
-    kHTwo: 500,
-    kHThree: 300,
-    kHFour: 500,
-    kHFive: 450,
-    kHSix: 300,
-    kHSeven: 400,
-
-    kHEight: 400
-  }
+  beforeMount() {
+    this.kWOne = Math.round(this.screenWidth * 0.23);
+    this.kHOne = Math.round(this.screenHeight * 0.42);
+    this.kFOne = Math.round(this.screenWidth / 120);
   },
-  created () {
-
-  },
-  mounted(){
+  mounted() {
     // 页面大小改变时触发
-    window.addEventListener('resize',this.getScreenHeight, false);
+    window.addEventListener("resize", this.getScreenHeight, false);
     // 页面大小改变时触发
-    window.addEventListener('resize',this.getScreenWidth, false);
+    window.addEventListener("resize", this.getScreenWidth, false);
     // 鼠标移动时触发
     //window.addEventListener('mousemove',this.getHeight, false);
-    this.timeInterval();
-    this.cancelLoading();
     this.resizeScreen();
+    // 获取后端接口数据
+    this.getData();
+    // 执行数据局部刷新定时器
+    //this.getDataTimer();
   },
-  beforeDestroy () {
-    clearInterval(this.timer)
+  destroyed() {
+    // 清除自适应定时器
     clearInterval(this.koiTime);
-    // 页面大小改变时触发
-    window.removeEventListener('resize',this.getScreenHeight, false);
-    // 页面大小改变时触发
-    window.removeEventListener('resize',this.getScreenWidth, false);
-  },
-  watch: {
-      screenWidth: function (news, old) {
-          if (news <= 1200) {
-            this.$notify({
-              title: '浏览器高度提示',
-              dangerouslyUseHTMLString: true,
-              message: '<strong style= "color: teal">浏览器宽度<1200px将不再进行自适应</strong>',
-              type: 'warning',
-              position: 'bottom-right',
-              duration: 2000
-            });
-          }
-      },
-      screenHeight: function (news, old) {
-          if (news <= 700) {
-            this.$notify({
-              title: '浏览器宽度提示',
-              dangerouslyUseHTMLString: true,
-              message: '<strong style= "color: teal">浏览器高度<700px将不再进行自适应</strong>',
-              type: 'warning',
-              position: 'bottom-right',
-              duration: 2000
-            });
-          } 
-      }
+    this.koiTime = null;
+    // 清除局部刷新定时器
+    clearInterval(this.koiTimer);
+    this.koiTimer = null;
+    // 页面大小改变时触发销毁
+    window.removeEventListener("resize", this.getScreenHeight, false);
+    // 页面大小改变时触发销毁
+    window.removeEventListener("resize", this.getScreenWidth, false);
   },
   methods: {
-    timeInterval() {
-      this.timer = setInterval(() => {
-        this.dateDay = formatTime(new Date(), 'HH: mm: ss')
-        this.dateYear = formatTime(new Date(), 'yyyy/MM/dd')
-        this.dateWeek = this.weekday[new Date().getDay()]
-      }, 1000)
-    },
-    cancelLoading() {
-      setTimeout(() => {
-        this.loading = false
-      }, 500)
-    },
-    resizeScreen(){
+    resizeScreen() {
       this.koiTime = setInterval(() => {
         this.getScreenHeight();
         this.getScreenWidth();
-      }, 200)
+      }, 200);
     },
     // 获取浏览器高度进行自适应
     getScreenHeight() {
-        this.screenHeight = window.innerHeight || document.documentElement.innerHeight || document.body.clientHeight;
-        // 四舍五入取整数
-        this.kHOne = Math.round(this.screenHeight * 0.47);
-        
-        this.kHTwo = Math.round(this.screenHeight * 0.47);
-        this.kHThree = Math.round(this.screenHeight * 0.4);
-        this.kHFour = Math.round(this.screenHeight * 0.54);
-        this.kHFive = Math.round(this.screenHeight * 0.31);
-        this.kHSix = Math.round(this.screenHeight * 0.31);
-        this.kHSeven = Math.round(this.screenHeight * 0.32);
-        //console.log(this.screenHeight +"-"+ Math.round(this.percentHThirty) +"-"+ Math.round(this.percentHForty));
+      this.screenHeight =
+        window.innerHeight ||
+        document.documentElement.innerHeight ||
+        document.body.clientHeight;
+      // 四舍五入取整数
+      this.kHOne = Math.round(this.screenHeight * 0.42);
+      //console.log("高度->"+this.screenHeight +"-"+ this.kHOne);
     },
     // 字体大小根据宽度自适应
-    getScreenWidth(){
-      this.screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      //console.log("hh-"+this.screenWidth+"-"+this.screenHeight);
-    }
-
-  }
-}
+    getScreenWidth() {
+      this.screenWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      this.kWOne = Math.round(this.screenWidth * 0.23);
+      this.kFOne = Math.round(this.screenWidth / 120);
+      //console.log("宽度->"+this.screenWidth);
+    },
+    getData() {
+      // getSignData().then(res => {
+      //   //console.log("ALLDATA->",JSON.stringify(res.data))
+      //   const { config } = this;
+      //   // 将数据赋值给DataV的胶囊柱图
+      //   this.config.data = res.data;
+      //   this.config = { ...this.config }
+      // })
+      // 获取服务器的数据, 对this.allData进行赋值之后, 调用updateChart方法更新图表
+      //console.log("ALLDATA->",JSON.stringify(res.data))
+      //console.log("ALLDATA->",JSON.stringify(this.allData))
+    },
+    // 定时器
+    getDataTimer() {
+      this.koiTimer = setInterval(() => {
+        // 执行刷新数据的方法
+        this.getData();
+        // console.log("Hello World")
+      }, 60000 * 10);
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>

@@ -7,7 +7,6 @@ const screenRouter = {
   name: "compositeScreen",
   meta: { 
     title: "医院当年综合数据",
-    hidden: true,
   }
 }
 
