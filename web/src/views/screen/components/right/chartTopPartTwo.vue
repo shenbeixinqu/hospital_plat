@@ -1,18 +1,13 @@
 <template>
   <div
-    class="test"
-    ref="right-main"
+    ref="chart-main"
     :style="{ height: chartHeight + 'px' }"
   ></div>
 </template>
 
 <script>
-import uniChart from "@/extra/index";
 import { chartRightTopTwo } from '@/api/screen/home'
 export default {
-  components: {
-    uniChart
-  },
   data() {
     return {
       disease_name: [],
@@ -22,7 +17,6 @@ export default {
       // 页面宽高
       screenHeight: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
       screenWidth: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      chartInstance: null,
       chartWidth: 0,
       chartHeight: 0,
       chartFont: 0,
@@ -34,9 +28,7 @@ export default {
       chartBarWidth: 0,
       chartTitleText: 0,
       chartLabelText: 0,
-      initOptions: {
-        renderer: "svg"
-      },
+     
       option: {
         title: [
           {
@@ -119,11 +111,11 @@ export default {
                 color: this.$echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: "rgb(57, 89, 255, 1)"
+                    color: "rgba(57, 89, 255, 1)"
                   },
                   {
                     offset: 1,
-                    color: "rgb(46, 200, 207, 1)"
+                    color: "rgba(46, 200, 207, 1)"
                   }
                 ])
               }
@@ -155,7 +147,7 @@ export default {
     window.addEventListener('resize',this.getScreenWidth, false);
     // 自适应浏览器获取宽高大小定时器
     this.resizeScreen();
-    const myChart = this.$echarts.init(this.$refs['right-main'])
+    const myChart = this.$echarts.init(this.$refs['chart-main'])
     this.chart = myChart
     // 图表初始化
     this.initChart();
@@ -260,6 +252,16 @@ export default {
           {
             itemStyle: {
               normal: {
+                color: this.$echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                  {
+                    offset: 0,
+                    color: "rgba(57, 89, 255, 1)"
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(46, 200, 207, 1)"
+                  }
+                ]),
                 borderRadius: this.chartBarBorderRadius
               }
             },

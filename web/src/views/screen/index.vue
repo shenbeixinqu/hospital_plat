@@ -18,19 +18,19 @@
       <!-- 第二部分 布局 start -->
       <div class="screen-layout">
         <el-row>
-          <el-col :span="5" class="screen-padding">
+          <el-col :span="7" class="screen-padding">
             <div :style="{ height: chartOne + 'px'}">
               <left-top-chart :chartLeftOne="chartLeftOne" :chartLeftTwo="chartLeftTwo" />
             </div>
           </el-col>
-          <el-col :span="14" class="screen-padding">
+          <el-col :span="10" class="screen-padding">
             <div :style="{ height: chartTwo + 'px'}">
               <dv-border-box-10>
                 <center-top-chart />
               </dv-border-box-10>
             </div>
           </el-col>
-          <el-col :span="5" class="screen-padding">
+          <el-col :span="7" class="screen-padding">
             <div :style="{ height: chartThree + 'px'}">
               <div>
                 <right-top-chart :chartRightOne="chartRightOne" :chartRightTwo="chartRightTwo" />
@@ -140,10 +140,10 @@ export default {
       this.chartFour = Math.round(this.screenHeight * 0.33)
       this.chartFive = Math.round(this.screenHeight * 0.33)
       this.chartSix = Math.round(this.screenHeight * 0.33)
-      this.chartLeftOne = Math.round(this.chartThree * 0.6)
-      this.chartLeftTwo = Math.round(this.chartThree * 0.4)
-      this.chartRightOne = Math.round(this.chartThree * 0.4)
-      this.chartRightTwo = Math.round(this.chartThree * 0.6)
+      this.chartLeftOne = Math.round(this.chartThree * 0.65)
+      this.chartLeftTwo = Math.round(this.chartThree * 0.35)
+      this.chartRightOne = Math.round(this.chartThree * 0.45)
+      this.chartRightTwo = Math.round(this.chartThree * 0.55)
     },
     // 字体大小根据宽度自适应
     getScreenWidth(){

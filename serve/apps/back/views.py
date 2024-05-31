@@ -369,10 +369,78 @@ def year_report_apply():
     return jsonify({"code": 200, "msg": "success"})
 
 
+@bp.route('/chart_left_top_one', methods=['GET'])
+def chart_left_top_one():
+    data = [
+        {"name": "脑科", "count": 2019},
+        {"name": "神经内科", "count": 1987},
+        {"name": "运动医学科", "count": 1815},
+        {"name": "运动医学科", "count": 1726},
+        {"name": "运动医学科", "count": 1667},
+        {"name": "运动医学科", "count": 1292},
+        {"name": "运动医学科", "count": 926},
+        {"name": "运动医学科", "count": 912},
+    ]
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
+@bp.route('/chart_left_top_two', methods=['GET'])
+def chart_left_top_two():
+    data = [
+        {"name": "张医生", "count": 2019},
+        {"name": "王医生", "count": 1987},
+        {"name": "李医生", "count": 1815},
+        {"name": "赵医生", "count": 1726},
+        {"name": "孙医生", "count": 1667},
+        {"name": "陈医生", "count": 1292},
+        {"name": "杜医生", "count": 926},
+        {"name": "钱医生", "count": 912},
+    ]
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
+@bp.route('/chart_left_top_three', methods=['GET'])
+def chart_left_top_three():
+    data = [
+        {"name": "张医生", "radio": "97.0"},
+        {"name": "王医生", "radio": "96.4"},
+        {"name": "李医生", "radio": "92.1"},
+        {"name": "赵医生", "radio": "89.5"},
+        {"name": "孙医生", "radio": "87.8"},
+        {"name": "陈医生", "radio": "82.3"},
+        # {"name": "杜医生", "radio": "80.9"},
+        # {"name": "钱医生", "radio": "81.1"},
+    ]
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
+@bp.route('/chart_right_top_one', methods=['GET'])
+def chart_right_top_one():
+    data = {
+        "data_one": 1589,
+        "data_two": 256,
+        "data_three": 356,
+        "data_four": 3652,
+        "data_five": 29856,
+    }
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
 @bp.route('/chart_right_top_two', methods=['GET'])
 def chart_right_top_two():
     data = {
         "disease_name": ["呼吸道感染", "高血压", "糖尿病", "支气管炎", "急性肠炎", "风湿"],
         "disease_count": [933, 850, 723, 680, 500, 300],
+    }
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
+@bp.route('/chart_center_bottom', methods=['GET'])
+def chart_center_bottom():
+    data = {
+        # 复诊
+        "visit_data": ["8.2", "7.1", "8.4", "8.0", "5.9", "4.2", "8.1", "3.0", "7.0", "8.0", "8.1", "9.0"],
+        # 接诊
+        "admission_data": ["6.2", "8.1", "5.4", "6.0", "4.1", "2.6", "8.8", "4.7", "7.2", "6.4", "7.1", "9.6"],
     }
     return jsonify({"code": 200, "datas": data, "msg": "success"})
