@@ -35,9 +35,23 @@ export function chartRightTopTwo() {
   });
 }
 
+export function chartLeftBottom() {
+  return request({
+    url: "/chart_left_bottom",
+    method: "GET",
+  });
+}
+
 export function chartCenterBottom() {
   return request({
     url: "/chart_center_bottom",
+    method: "GET",
+  });
+}
+
+export function chartRightBottom() {
+  return request({
+    url: "/chart_right_bottom",
     method: "GET",
   });
 }

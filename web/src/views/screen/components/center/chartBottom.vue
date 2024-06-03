@@ -25,14 +25,15 @@ export default {
       chartTime: null,
       chart: null,
 
+      chartLabelText: 0,
+      chartBarWidth: 0,
+
       option: {
         title: {
           text: "全院网上复诊&接诊趋势",
-          subtext: "单位: (万人次)",
           textStyle: {
             align: "center",
             color: "#0dc1ff",
-            fontSize: 16,
           },
           subtextStyle: {
             top: "6%",
@@ -47,6 +48,12 @@ export default {
             type: "none",
           },
         },
+        grid: {
+          left: "5%",
+          right: "6%",
+          bottom: "18%",
+          containLabel: true,
+        },
         legend: {
           data: ["网上复诊", "网上接诊"],
           top: "12%",
@@ -56,18 +63,18 @@ export default {
         },
         xAxis: {
           data: [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12",
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月",
           ],
           axisLine: {
             show: true,
@@ -87,6 +94,10 @@ export default {
         },
         yAxis: [
           {
+            name: "单位: 万人次",
+            nameTextStyle: {
+              color: "#ebf8ac",
+            },
             type: "value",
             splitLine: {
               show: true,
@@ -165,9 +176,9 @@ export default {
             lineStyle: {
               color: "#058cff",
             },
-            areaStyle: {
-              color: "rgba(5,140,255, 0.2)",
-            },
+            // areaStyle: {
+            //   color: "rgba(5,140,255, 0.2)",
+            // },
           },
           {
             name: "网上接诊",
@@ -209,6 +220,10 @@ export default {
     this.chart = myChart;
     // 图表初始化
     this.initChart();
+    // 调用Echarts图表自适应方法
+    this.screenAdapter();    
+    // Echarts图表自适应
+    window.addEventListener("resize", this.screenAdapter);
   },
   destroyed() {
     // 清除自适应定时器
@@ -218,6 +233,8 @@ export default {
     window.removeEventListener("resize", this.getScreenHeight, false);
     // 页面大小改变时触发销毁
     window.removeEventListener("resize", this.getScreenWidth, false);
+    // Echarts图表自适应销毁
+    window.removeEventListener("resize", this.screenAdapter);
   },
   methods: {
     initChart() {
@@ -249,6 +266,76 @@ export default {
         ],
       };
       this.chart.setOption(dataOption);
+    },
+    screenAdapter() {
+      this.chartLabelText = Math.round(this.screenWidth / 133);
+      this.chartFont = Math.round(this.screenWidth / 100);
+      this.chartBarWidth = Math.round(this.screenWidth / 160)
+
+      const adapterOption = {
+        title: {
+          textStyle: {
+            fontSize: this.chartFont 
+          }
+        },
+        legend: {
+          textStyle: {
+            fontSize: this.chartLabelText
+          }
+        },
+        xAxis: {
+          axisLabel: {
+            textStyle: {
+              fontSize: this.chartLabelText
+            }
+          }
+        },
+        yAxis: [
+          {
+            axisLabel: {
+              textStyle: {
+                fontSize: this.chartLabelText
+              }
+            },
+            nameTextStyle: {
+              fontSize: this.chartLabelText
+            }
+          },
+          {
+            axisLabel: {
+              textStyle: {
+                fontSize: this.chartLabelText
+              }
+            },
+          }
+        ],
+        series: [
+          {
+            // areaStyle: {
+            //   color: "rgba(5,140,255, 0.2)",
+            // },
+          },
+          {
+            itemStyle: {
+              normal: {
+                color: this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#00FFE3",
+                  },
+                  {
+                    offset: 1,
+                    color: "#4693EC",
+                  },
+                ]),
+              },
+            },
+            barWidth: this.chartBarWidth
+          }
+        ]
+      }
+      this.chart.setOption(adapterOption)
+      this.chart.resize()
     },
     resizeScreen() {
       this.chartTime = setInterval(() => {

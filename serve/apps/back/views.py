@@ -435,6 +435,25 @@ def chart_right_top_two():
     return jsonify({"code": 200, "datas": data, "msg": "success"})
 
 
+@bp.route('/chart_left_bottom', methods=['GET'])
+def chart_left_bottom():
+    data = {
+        # 配送量
+        "deliveryData": [4.8, 7.1, 6.3, 6.8, 7.2, 8.1, 6.4, 6.6, 5.9, 9.1, 6.3, 6.0],
+        # 化验量
+        "assayData": [4.0, 4.3, 2.9, 3.1, 3.7, 4.0, 3.8, 4.6, 5.2, 4.7, 4.1, 2.9],
+        # 检查项
+        "examineData": [4.2, 5.8, 5.2, 6.1, 5.7, 4.1, 4.8, 5.8, 4.6, 4.2, 3.8, 4.7],
+        # 治疗量
+        "treatData": [1.7, 3.1, 1.9, 3.7, 3.5, 1.6, 2.2, 3.0, 1.7, 0.9, 2.6, 2.2],
+        "deliveryValue": 18756,
+        "assayValue": 14237,
+        "examineValue": 12657,
+        "treatValue": 16316,
+    }
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
 @bp.route('/chart_center_bottom', methods=['GET'])
 def chart_center_bottom():
     data = {
@@ -443,4 +462,17 @@ def chart_center_bottom():
         # 接诊
         "admission_data": ["6.2", "8.1", "5.4", "6.0", "4.1", "2.6", "8.8", "4.7", "7.2", "6.4", "7.1", "9.6"],
     }
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
+@bp.route('/chart_right_bottom', methods=['GET'])
+def chart_right_bottom():
+    data = [
+        {"name": "网上复诊挂号", "value": 13},
+        {"name": "网上治疗", "value": 7},
+        {"name": "网上开具化验", "value": 20},
+        {"name": "网上开具药品", "value": 33},
+        {"name": "网上开具检查", "value": 27},
+    ]
+
     return jsonify({"code": 200, "datas": data, "msg": "success"})
