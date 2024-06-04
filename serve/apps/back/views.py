@@ -414,6 +414,23 @@ def chart_left_top_three():
     return jsonify({"code": 200, "datas": data, "msg": "success"})
 
 
+@bp.route('/chart_center_top', methods=['GET'])
+def chart_center_top():
+    data = [
+        {"name": "辽宁省", "value": 90},
+        {"name": "吉林省", "value": 60},
+        {"name": "黑龙江省", "value": 15},
+        {"name": "陕西省", 'value': 10},
+        {"name": "山西省", "value": 12},
+        {"name": "山东省", "value": 9},
+        {"name": "河南省", "value": 35},
+        {"name": "河北省", "value": 19},
+        {"name": "广东省", "value": 4},
+        {"name": "广西省", "value": 39},
+    ]
+    return jsonify({"code": 200, "datas": data, "msg": "success"})
+
+
 @bp.route('/chart_right_top_one', methods=['GET'])
 def chart_right_top_one():
     data = {

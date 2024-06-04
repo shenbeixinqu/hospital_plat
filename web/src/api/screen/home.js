@@ -21,6 +21,13 @@ export function chartLeftTopThree() {
   });
 }
 
+export function chartCenterTop() {
+  return request({
+    url: "/chart_center_top",
+    method: "GET",
+  });
+}
+
 export function chartRightTopOne() {
   return request({
     url: "/chart_right_top_one",
