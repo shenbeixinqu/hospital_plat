@@ -1,5 +1,13 @@
 <template>
-  <div ref="chart-main" :style="{ height: chartHeight + 'px' }"></div>
+  <div :style="{ height: chartHeight + 'px' }">
+    <div 
+      class="first"
+      style="color: #0dc1ff"
+      :style="{ fontSize: chartFontSixteen + 'px', padding: chartPaddingFourteen + 'px'}"
+    >全院网上复诊&接诊趋势</div>
+    <div ref="chart-main" :style="{ height: chartSubHeight + 'px'}"></div>
+
+  </div>
 </template>
 
 <script>
@@ -21,25 +29,23 @@ export default {
         document.body.clientWidth,
       chartWidth: 0,
       chartHeight: 0,
+      chartSubHeight: 0,
       chartFont: 0,
       chartTime: null,
       chart: null,
+
+      chartFontSixteen: 0,
+      chartPaddingFourteen: 0,
 
       chartLabelText: 0,
       chartBarWidth: 0,
 
       option: {
         title: {
-          text: "全院网上复诊&接诊趋势",
-          textStyle: {
-            align: "center",
-            color: "#0dc1ff",
-          },
           subtextStyle: {
             top: "6%",
             color: "#ebf8ac",
           },
-          top: "3%",
           left: "10%",
         },
         tooltip: {
@@ -51,7 +57,8 @@ export default {
         grid: {
           left: "5%",
           right: "6%",
-          bottom: "18%",
+          top: "23%",
+          bottom: "2%",
           containLabel: true,
         },
         legend: {
@@ -205,7 +212,7 @@ export default {
     };
   },
   beforeMount() {
-    this.chartHeight = Math.round(this.screenHeight * 0.4);
+    this.chartHeight = Math.round(this.screenHeight * 0.33);
   },
   mounted() {
     // 获取接口数据
@@ -350,7 +357,8 @@ export default {
         document.documentElement.innerHeight ||
         document.body.clientHeight;
       // 四舍五入取整数
-      this.chartHeight = Math.round(this.screenHeight * 0.38);
+      this.chartHeight = Math.round(this.screenHeight * 0.33);
+      this.chartSubHeight = Math.round(this.chartHeight * 0.8)
       this.chart.resize();
     },
     // 字体大小根据宽度自适应
@@ -361,11 +369,17 @@ export default {
         document.body.clientWidth;
       this.chartWidth = Math.round(this.screenWidth * 0.18);
       this.chartFont = Math.round(this.screenWidth / 100);
+      this.chartFontSixteen = Math.round(this.screenWidth / 100)
+      this.chartPaddingFourteen = Math.round(this.screenWidth / 114)
       this.chart.resize();
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .first {
+    height: 15%;
+    font-weight: 700;
+  }
 </style>
