@@ -433,13 +433,13 @@ def chart_center_top():
 
 @bp.route('/chart_right_top_one', methods=['GET'])
 def chart_right_top_one():
-    data = {
-        "data_one": 1589,
-        "data_two": 256,
-        "data_three": 356,
-        "data_four": 3652,
-        "data_five": 29856,
-    }
+    data = [
+        {"name": "接诊后无诊断", "value": 1589},
+        {"name": "医生拒诊", "value": 256},
+        {"name": "投诉(无方案)", "value": 356},
+        {"name": "无电子病历", "value": 3652},
+        {"name": "超时拒诊", "value": 29856},
+    ]
     return jsonify({"code": 200, "datas": data, "msg": "success"})
 
 
