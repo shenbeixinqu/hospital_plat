@@ -417,16 +417,16 @@ def chart_left_top_three():
 @bp.route('/chart_center_top', methods=['GET'])
 def chart_center_top():
     data = [
-        {"name": "辽宁省", "value": 90},
-        {"name": "吉林省", "value": 60},
-        {"name": "黑龙江省", "value": 15},
-        {"name": "陕西省", 'value': 10},
-        {"name": "山西省", "value": 12},
-        {"name": "山东省", "value": 9},
-        {"name": "河南省", "value": 35},
-        {"name": "河北省", "value": 19},
-        {"name": "广东省", "value": 4},
-        {"name": "广西省", "value": 39},
+        {"name": "辽宁省", "value": 90, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "吉林省", "value": 60, "lineData": [20, 12, 38, 59, 43, 84, 19, 27, 40, 33, 18, 21]},
+        {"name": "黑龙江省", "value": 15, "lineData": [40, 52, 68, 79, 23, 34, 39, 27, 10, 63, 78, 51]},
+        {"name": "陕西省", 'value': 10, "lineData": [24, 42, 28, 89, 13, 24, 39, 47, 70, 53, 73, 71]},
+        {"name": "山西省", "value": 12, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "山东省", "value": 9, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "河南省", "value": 35, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "河北省", "value": 19, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "广东省", "value": 4, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
+        {"name": "广西省", "value": 39, "lineData": [80, 72, 68, 79, 73, 84, 89, 87, 90, 83, 78, 81]},
     ]
     return jsonify({"code": 200, "datas": data, "msg": "success"})
 

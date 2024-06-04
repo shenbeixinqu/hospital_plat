@@ -218,7 +218,7 @@ export default {
       this.chartBarBorderRadius = Math.round(this.screenWidth / 100);
       this.chartBarWidth = Math.round(this.screenWidth / 100);
       this.chartLabelText = Math.round(this.screenWidth / 133);
-      this.chartTitleText = Math.round(this.screenWidth / 89);
+      this.chartTitleText = Math.round(this.screenWidth / 100);
       const adapterOption = {
         title: [
           {

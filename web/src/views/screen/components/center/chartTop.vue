@@ -1,5 +1,16 @@
 <template>
-  <div ref="chart-main" :style="{ height: chartHeight + 'px' }"></div>
+  <div class="line_parent">
+    <!-- 地图容器 -->
+    <div ref="chart-main" :style="{ height: chartHeight + 'px' }" />
+    <!-- 弹窗容器 -->
+    <!-- 折线图容器 -->
+    <div
+        v-show="popupVisible" 
+        ref="lineChart"
+        class="line_popup"
+        @click="handlePopup"
+      />
+    </div>
 </template>
 
 <script>
@@ -8,8 +19,12 @@ import { chartCenterTop } from "@/api/screen/home";
 export default {
   data() {
     return {
+      popupVisible: false,
       mapData: [],
 
+      clickDown: false,
+      // 用于记录当前被选中的省份
+      selectedProvince: null,
       // 页面宽高
       screenHeight:
         window.innerHeight ||
@@ -24,6 +39,7 @@ export default {
       chartFont: 0,
       chartTime: null,
       chart: null,
+      lineChart: null, // 折线图实例
     };
   },
   beforeMount() {
@@ -122,19 +138,34 @@ export default {
           {
             type: "map",
             map: "china",
+            selectedMode: false,
             geoIndex: 1,
             showLegendSymbol: false, // 存在legend时显示
             roam: false,
           },
         ],
       };
+      // this.chart.on('click', () => {
+      //   console.log("cnm")
+      // })
       this.chart.setOption(option);
+      
+      this.chart.on('click', (params) => {
+        var lineData = this.mapData.find(item => item.name === params.name).lineData;
+        if (!this.clickDown) {
+          this.showLineChart(lineData, params.name);
+          this.clickDown = true
+          setTimeout(() => {
+            this.clickDown = false
+          }, 1000)
+        }
+      });
     },
     getChartData() {
       chartCenterTop().then((res) => {
         if (res.code === 200) {
           this.mapData = res.datas;
-          this.updateChartData();
+          this.updataChartData();
         } else {
           this.$message({
             type: "error",
@@ -143,15 +174,40 @@ export default {
         }
       });
     },
-    updateChartData() {
+    updataChartData() {
       const dataOption = {
         series: [
           {
-            data:  this.mapData
+            data: this.mapData
           }
         ]
       }
       this.chart.setOption(dataOption)
+    },
+    updateChartAreaData() {
+      const dataOption = {
+        series: [
+          {
+            emphasis: {
+              itemStyle: {
+                areaColor: "#f00"
+              }
+            },
+          }
+        ]
+      }
+      this.chart.setOption(dataOption)
+    },
+    updataLineChartData(data) {
+      const dataOption = {
+        series: [
+          {
+            silent: true,
+            data: data
+          }
+        ]
+      }
+      this.lineChart.setOption(dataOption)
     },
     resizeScreen() {
       this.chartTime = setInterval(() => {
@@ -178,9 +234,62 @@ export default {
       this.chartWidth = Math.round(this.screenWidth * 0.18);
       this.chart.resize();
     },
+    showLineChart(data, name) {
+      this.popupVisible = true
+      const myLineChart = this.$echarts.init(this.$refs['lineChart'])
+      this.lineChart = myLineChart
+      const lineOption = {
+        title: {
+          text: name,
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        xAxis: {
+          type: 'category',
+          axisTick: {
+            show: false,
+          },
+          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            show: true,
+          },
+        },
+        series: [{
+          name: "单量",
+          type: 'line',
+        }]
+      };
+      this.lineChart.setOption(lineOption);
+      this.updataLineChartData(data)
+    },
+    handlePopup() {
+      this.popupVisible = false
+    },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .line_parent {
+    position: relative;
+  }
+  .line_popup {
+    background: rgba(255, 255, 255, 0.8);
+    height: 200px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 使用transform来偏移自身的50%宽度和高度 */
+  }
 </style>
