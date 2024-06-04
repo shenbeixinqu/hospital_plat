@@ -60,6 +60,13 @@ export default {
       let option = {
         tooltip: {
           trigger: "item",
+          formatter: function (params) {
+            if (params.value) {
+              return params.name + " : " + params.value;
+            } else {
+              return params.name + " : " + 0;
+            }
+          },
         },
         visualMap: {
           show: true,
@@ -118,7 +125,6 @@ export default {
             geoIndex: 1,
             showLegendSymbol: false, // 存在legend时显示
             roam: false,
-            data: this.mapData,
           },
         ],
       };
