@@ -3,9 +3,8 @@
  */
 
 module.exports = {
+  // baseURL: "http://172.18.3.160:9003/api",
   baseURL: "http://10.1.1.181:5006/back",
-  // baseURL: "http://127.0.0.1:4523/m1/4471042-4117429-default",
-  // baseURL: "http://10.1.1.181:6789",
   contentType: "application/json;charset=UTF-8",
   requestTimeout: 20000,
   // 操作code 支持String int

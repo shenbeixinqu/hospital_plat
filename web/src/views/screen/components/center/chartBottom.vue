@@ -83,7 +83,10 @@ export default {
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "none",
+            type: "shadow",
+            label: {
+              show: true,
+            }
           },
         },
         grid: {
