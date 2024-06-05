@@ -30,7 +30,10 @@
         class="rank-button"
         :style="{
           fontSize: chartFontTwelve + 'px',
-          padding: chartPaddingFour + 'px',
+          paddingTop: chartPaddingTwo + 'px',
+          paddingBottom: chartPaddingTwo + 'px',
+          paddingLeft: chartPaddingSix + 'px',
+          paddingRight: chartPaddingSix + 'px',
         }"
         >显示所有</span
       >
@@ -48,6 +51,7 @@ export default {
       chartFontTwelve: 0,
       chartFontFourteen: 0,
       chartFontSixteen: 0,
+      chartPaddingTwo: 0,
       chartPaddingFour: 0,
       chartPaddingSix: 0,
       chartPaddingEight: 0,
@@ -142,6 +146,7 @@ export default {
       this.chartFontTwelve = Math.round(this.screenWidth / 133);
       this.chartFontFourteen = Math.round(this.screenWidth / 114);
       this.chartFontSixteen = Math.round(this.screenWidth / 100);
+      this.chartPaddingTwo = Math.round(this.screenWidth / 800);
       this.chartPaddingFour = Math.round(this.screenWidth / 400);
       this.chartPaddingSix = Math.round(this.screenWidth / 267);
       this.chartPaddingEight = Math.round(this.screenWidth / 200);
@@ -171,8 +176,8 @@ export default {
   justify-content: center;
 }
 .rank-button {
-  color: white; /* 文字颜色 */
-  border: 1px solid #007bff; /* 边框颜色与宽度 */
+  color: #0dc1ff; /* 文字颜色 */
+  border: 1px solid #0dc1ff; /* 边框颜色与宽度 */
   border-radius: 12px; /* 圆角边框半径 */
   cursor: pointer; /* 鼠标悬停时显示手形图标 */
   transition: all 0.3s ease; /* 平滑过渡效果 */

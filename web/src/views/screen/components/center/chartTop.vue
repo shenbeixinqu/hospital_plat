@@ -145,9 +145,6 @@ export default {
           },
         ],
       };
-      // this.chart.on('click', () => {
-      //   console.log("cnm")
-      // })
       this.chart.setOption(option);
       
       this.chart.on('click', (params) => {

@@ -1,12 +1,40 @@
 <template>
-  <div :style="{ height: chartHeight + 'px' }">
-    <div 
-      class="first"
-      style="color: #0dc1ff"
-      :style="{ fontSize: chartFontSixteen + 'px', padding: chartPaddingFourteen + 'px'}"
-    >全院网上复诊&接诊趋势</div>
-    <div ref="chart-main" :style="{ height: chartSubHeight + 'px'}"></div>
-
+  <div :style="{ height: chartHeight + 'px', padding: chartPaddingFourteen + 'px' }">
+    <div class="main" >
+      <div
+        class="first"
+        style="color: #0dc1ff"
+        :style="{
+          fontSize: chartFontSixteen + 'px',
+        }"
+      >
+        全院网上复诊&接诊趋势
+      </div>
+      <div>
+        <button
+          class="button"
+          :style="{
+            fontSize: chartFontTwelve + 'px',
+            paddingTop: chartPaddingTwo + 'px',
+            paddingBottom: chartPaddingTwo + 'px',
+            paddingLeft: chartPaddingSix + 'px',
+            paddingRight: chartPaddingSix + 'px',
+          }"
+        >复诊按科室</button>
+        <span :style="{ paddingLeft: chartPaddingSix + 'px'}"></span>
+        <button
+          class="button"
+          :style="{
+            fontSize: chartFontTwelve + 'px',
+            paddingTop: chartPaddingTwo + 'px',
+            paddingBottom: chartPaddingTwo + 'px',
+            paddingLeft: chartPaddingSix + 'px',
+            paddingRight: chartPaddingSix + 'px',
+          }"
+        >接诊按科室</button>
+      </div>
+    </div>
+    <div ref="chart-main" :style="{ height: chartSubHeight + 'px' }"></div>
   </div>
 </template>
 
@@ -34,7 +62,11 @@ export default {
       chartTime: null,
       chart: null,
 
+      chartFontTwelve: 0,
       chartFontSixteen: 0,
+      chartPaddingTwo: 0,
+      chartPaddingSix: 0,
+      chartPaddingTen: 0,
       chartPaddingFourteen: 0,
 
       chartLabelText: 0,
@@ -55,10 +87,10 @@ export default {
           },
         },
         grid: {
-          left: "5%",
-          right: "6%",
+          left: "3%",
+          right: "3%",
           top: "23%",
-          bottom: "2%",
+          bottom: "1%",
           containLabel: true,
         },
         legend: {
@@ -228,7 +260,7 @@ export default {
     // 图表初始化
     this.initChart();
     // 调用Echarts图表自适应方法
-    this.screenAdapter();    
+    this.screenAdapter();
     // Echarts图表自适应
     window.addEventListener("resize", this.screenAdapter);
   },
@@ -277,44 +309,44 @@ export default {
     screenAdapter() {
       this.chartLabelText = Math.round(this.screenWidth / 133);
       this.chartFont = Math.round(this.screenWidth / 100);
-      this.chartBarWidth = Math.round(this.screenWidth / 160)
+      this.chartBarWidth = Math.round(this.screenWidth / 160);
 
       const adapterOption = {
         title: {
           textStyle: {
-            fontSize: this.chartFont 
-          }
+            fontSize: this.chartFont,
+          },
         },
         legend: {
           textStyle: {
-            fontSize: this.chartLabelText
-          }
+            fontSize: this.chartLabelText,
+          },
         },
         xAxis: {
           axisLabel: {
             textStyle: {
-              fontSize: this.chartLabelText
-            }
-          }
+              fontSize: this.chartLabelText,
+            },
+          },
         },
         yAxis: [
           {
             axisLabel: {
               textStyle: {
-                fontSize: this.chartLabelText
-              }
+                fontSize: this.chartLabelText,
+              },
             },
             nameTextStyle: {
-              fontSize: this.chartLabelText
-            }
+              fontSize: this.chartLabelText,
+            },
           },
           {
             axisLabel: {
               textStyle: {
-                fontSize: this.chartLabelText
-              }
+                fontSize: this.chartLabelText,
+              },
             },
-          }
+          },
         ],
         series: [
           {
@@ -337,12 +369,12 @@ export default {
                 ]),
               },
             },
-            barWidth: this.chartBarWidth
-          }
-        ]
-      }
-      this.chart.setOption(adapterOption)
-      this.chart.resize()
+            barWidth: this.chartBarWidth,
+          },
+        ],
+      };
+      this.chart.setOption(adapterOption);
+      this.chart.resize();
     },
     resizeScreen() {
       this.chartTime = setInterval(() => {
@@ -358,7 +390,7 @@ export default {
         document.body.clientHeight;
       // 四舍五入取整数
       this.chartHeight = Math.round(this.screenHeight * 0.33);
-      this.chartSubHeight = Math.round(this.chartHeight * 0.8)
+      this.chartSubHeight = Math.round(this.chartHeight * 0.8);
       this.chart.resize();
     },
     // 字体大小根据宽度自适应
@@ -369,8 +401,12 @@ export default {
         document.body.clientWidth;
       this.chartWidth = Math.round(this.screenWidth * 0.18);
       this.chartFont = Math.round(this.screenWidth / 100);
-      this.chartFontSixteen = Math.round(this.screenWidth / 100)
-      this.chartPaddingFourteen = Math.round(this.screenWidth / 114)
+      this.chartFontTwelve = Math.round(this.screenWidth / 133);
+      this.chartFontSixteen = Math.round(this.screenWidth / 100);
+      this.chartPaddingTwo = Math.round(this.screenWidth / 800);
+      this.chartPaddingSix = Math.round(this.screenWidth / 267);
+      this.chartPaddingTen = Math.round(this.screenWidth / 160);
+      this.chartPaddingFourteen = Math.round(this.screenWidth / 114);
       this.chart.resize();
     },
   },
@@ -378,8 +414,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .first {
-    height: 15%;
-    font-weight: 700;
-  }
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+.first {
+  height: 15%;
+  font-weight: 700;
+}
+.button {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: #03050c;
+  color: #0dc1ff; /* 文字颜色 */
+  border: 1px solid #0dc1ff; /* 边框颜色与宽度 */
+  border-radius: 12px; /* 圆角边框半径 */
+  cursor: pointer; /* 鼠标悬停时显示手形图标 */
+  transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+.button:hover {
+  background-color: #0056b3; /* 鼠标悬停时的背景颜色 */
+  border-color: #0056b3; /* 鼠标悬停时的边框颜色 */
+}
 </style>

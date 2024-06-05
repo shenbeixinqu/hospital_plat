@@ -1,8 +1,8 @@
 <template>
   <div
     ref="chart-main"
-    :style="{ height: chartHeight + 'px' }"
-  ></div>
+    :style="{ height: chartHeight + 'px'}"
+  />
 </template>
 
 <script>
@@ -28,7 +28,9 @@ export default {
       chartBarWidth: 0,
       chartTitleText: 0,
       chartLabelText: 0,
-     
+      chartFontFourteen: 0,
+      chartPaddingFourteen: 0,
+    
       option: {
         title: [
           {
@@ -217,7 +219,7 @@ export default {
     screenAdapter() {
       this.chartBarBorderRadius = Math.round(this.screenWidth / 100);
       this.chartBarWidth = Math.round(this.screenWidth / 100);
-      this.chartLabelText = Math.round(this.screenWidth / 133);
+      this.chartLabelText = Math.round(this.screenWidth / 114);
       this.chartTitleText = Math.round(this.screenWidth / 100);
       const adapterOption = {
         title: [
@@ -298,6 +300,8 @@ export default {
       this.screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       this.chartWidth = Math.round(this.screenWidth * 0.18);
       this.chartFont = Math.round(this.screenWidth / 100);
+      this.chartFontFourteen = Math.round(this.screenWidth / 114);
+      this.chartPaddingFourteen = Math.round(this.screenWidth / 160);
       this.chart.resize()
     },
   }
