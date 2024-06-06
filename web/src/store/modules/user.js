@@ -54,7 +54,7 @@ const actions = {
   async login({ commit }, userInfo) {
     console.log("userinfo", userInfo);
     const {
-      data: { token },
+      datas: { token },
     } = await login(userInfo);
     console.log("token", token);
     commit("setToken", token);
@@ -74,7 +74,7 @@ const actions = {
   async getUserInfo({ commit, dispatch }) {
     const searchData = { token_value: localStorage.getItem("pro-token") };
     const {
-      data: { username, roles, ability, avatar },
+      datas: { username, roles, ability, avatar },
     } = await getRoleInfo(searchData);
     // 检查返回数据是否正确 无对应参数 使用默认值
     if (

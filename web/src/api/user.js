@@ -26,7 +26,7 @@ export function logout(data) {
 
 export function getRoleInfo(params) {
   return request({
-    url: "/userInfo",
+    url: "/user/info",
     method: "get",
     params,
   });

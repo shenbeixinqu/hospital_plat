@@ -51,7 +51,7 @@ def user_info():
             "avatar": "https://i.gtimg.cn/club/item/face/img/2/16022_100.gif"
         }
     else:
-        data["data"] = {
+        data["datas"] = {
             "roles": ["admin"],
             "ability": ["READ", "WRITE", "DELETE"],
             "username": "admin",

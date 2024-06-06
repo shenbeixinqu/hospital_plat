@@ -14,7 +14,7 @@ module.exports = {
   // token的存储key名称
   tokenTableName: "pro-token",
   // token的存储位置
-  storage: "localStorage",
+  storage: "sessionStorage",
   // 需要加loading层的请求，防止重复提交
   debounce: ["doEdit"],
   // 是否开启登录拦截
