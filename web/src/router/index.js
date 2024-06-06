@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Layout from "@/uni/layouts";
 import systemRouter from './modules/systemManage'
 import screenRouter from "./modules/screen";
+import roleRouter from './modules/roleManage'
 import { publicPath, routerMode } from "@/config";
 Vue.use(VueRouter);
 
@@ -45,6 +46,7 @@ export const asyncRoutes = [
     ],
   },
   systemRouter,
+  roleRouter,
   screenRouter
 ];
 

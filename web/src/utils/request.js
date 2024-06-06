@@ -46,7 +46,6 @@ const CODE_MESSAGE = {
  */
 const requestConf = (config) => {
   const token = store.getters["user/token"];
-
   if (token) config.headers["Authorization"] = `Bearer ${token}`;
   if (
     config.data &&
