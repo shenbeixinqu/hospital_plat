@@ -15,9 +15,7 @@
     </el-form>
     <template #footer>
       <el-button size="small" @click="dialogClose">取消</el-button>
-      <el-button size="small" type="primary" @click="handleSubmit"
-        >确定</el-button
-      >
+      <my-button @click="handleSubmit" />
     </template>
   </el-dialog>
 </template>

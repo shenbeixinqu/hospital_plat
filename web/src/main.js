@@ -9,6 +9,10 @@ import "./icons";
 import "./uni/index"
 import "./assets/css/reset.css"
 import "./assets/css/screen.scss"
+import MyButton from './uni/components/UniButton'; // 调整为你的组件路径
+
+// 全局注册组件
+Vue.component('my-button', MyButton);
 
 // 引入DataV,将自动注册所有组件为全局组件
 import dataV from '@jiaminghi/data-view';
