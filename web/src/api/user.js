@@ -16,11 +16,11 @@ export function register(data) {
   });
 }
 
-export function logout(data) {
+export function logout(params) {
   return request({
     url: "/logout",
-    method: "POST",
-    data,
+    method: "GET",
+    params,
   });
 }
 

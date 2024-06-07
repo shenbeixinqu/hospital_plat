@@ -6,7 +6,12 @@
         <p class="page-header-tip-title">
           {{ handleTips() }}
         </p>
-        <p class="page-header-tip-description">科室: 神经内科 <span>|</span> 角色: 科室主任 <span>|</span></p>
+        <p class="page-header-tip-description">
+          <span>科室: {{ dep_name| depNameFilter }}</span>
+          <span class="page-header-split-span">|</span>
+          <span>角色: {{ role_name }}</span>
+          <span class="page-header-split-span">|</span>
+        </p>
       </div>
       <div class="page-header-data">
         <div class="page-header-data-part">
@@ -42,11 +47,22 @@ export default {
   },
   created() {
     this.get_header_data()
-  },  
+  },
+  filters: {
+    depNameFilter(val) {
+      if (val === '') {
+        return "暂无"
+      } else {
+        return val
+      }
+    }
+  }, 
   computed: {
     ...mapGetters({
       avatar: "user/avatar",
       username: "user/username",
+      dep_name: "user/dep_name",
+      role_name: "user/role_name"
     }),
   },
   methods: {
@@ -145,8 +161,9 @@ export default {
       }
     }
   }
-  span {
-    padding: 0 5px;
+  &-split-span {
+    padding-right: 8px;
+    padding-left: 8px;
   }
   .split-line {
     width: 2px;

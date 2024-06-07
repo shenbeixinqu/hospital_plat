@@ -5,7 +5,9 @@ import { resetRouter } from "@/router";
 
 const state = () => ({
   token: getToken(),
-  username: "admin",
+  username: "",
+  dep_name: "",
+  role_name: "",
   userid: "5",
   avatar: "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
 });
@@ -15,6 +17,8 @@ const getters = {
   avatar: (state) => state.avatar,
   userid: (state) => state.userid,
   username: (state) => state.username,
+  dep_name: (state) => state.dep_name,
+  role_name: (state) => state.role_name,
 };
 
 const mutations = {
@@ -43,6 +47,22 @@ const mutations = {
   setAvatar(state, avatar) {
     state.avatar = avatar;
   },
+  /**
+   * @description 设置科室
+   * @param {*} state
+   * @param {*} dep_name
+   */
+  setDepName(state, dep_name) {
+    state.dep_name = dep_name
+  },
+   /**
+   * @description 设置角色
+   * @param {*} state
+   * @param {*} role_name
+   */
+  setRoleName(state, role_name) {
+    state.role_name = role_name
+  },
 };
 
 const actions = {
@@ -56,7 +76,6 @@ const actions = {
     const {
       datas: { token },
     } = await login(userInfo);
-    console.log("token", token);
     commit("setToken", token);
   },
   /**
@@ -74,22 +93,24 @@ const actions = {
   async getUserInfo({ commit, dispatch }) {
     const searchData = { token_value: localStorage.getItem("pro-token") };
     const {
-      datas: { username, roles, ability, avatar },
+      datas: { name, menu, dep_name, role_name, ability, avatar },
     } = await getRoleInfo(searchData);
     // 检查返回数据是否正确 无对应参数 使用默认值
     if (
-      (username && !isString(username)) ||
+      (name && !isString(name)) ||
       (avatar && !isString(avatar)) ||
-      (roles && !isArray(roles)) ||
+      (menu && !isArray(menu)) ||
       (ability && !isArray(ability))
     ) {
       const err = "接口异常,请检查返回JSON格式是否正确";
       throw err;
     } else {
-      localStorage.setItem("pro-token", `${username}-token`);
-      if (username) commit("setUsername", username);
+      localStorage.setItem("pro-token", `${name}-token`);
+      if (name) commit("setUsername", name);
       if (avatar) commit("setAvatar", avatar);
-      if (roles) dispatch("acl/setRole", roles, { root: true });
+      if (dep_name) commit("setDepName", dep_name);
+      if (role_name) commit("setRoleName", role_name);
+      if (menu) dispatch("acl/setRole", menu, { root: true });
       if (ability) dispatch("acl/setAbility", ability, { root: true });
     }
   },

@@ -5,7 +5,7 @@
     </el-row>
     <el-tabs v-model="activeName" type="card" @tab-click="tabClick">
       <template v-for="(item, index) in tabData">
-        <el-tab-pane :label="item.label" :name="item.name" :key="index">
+        <el-tab-pane :label="item.label" :name="item.name" :key="index" v-if="checkPermission(item.permission)">
           <rank :statisticsData="statisticsData" v-if="activeName === item.name" />
         </el-tab-pane>
       </template>
@@ -17,6 +17,7 @@
 import PageHeader from "./components/PageHeader.vue";
 import Rank from "./components/rank.vue";
 import { statistics_data } from "@/api/index";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Index",
@@ -30,13 +31,18 @@ export default {
   data() {
     return {
       tabData: [
-        { label: "@我", name: "my" },
-        { label: "科室", name: "room" },
-        { label: "全院", name: "all" },
+        { label: "@我", name: "my", "permission":  0 },
+        { label: "科室", name: "room", "permission": 9 },
+        { label: "全院", name: "all", "permission": 10 },
       ],
       activeName: "my",
       statisticsData: {},
     };
+  },
+  computed: {
+    ...mapGetters({
+      role: "acl/role"
+    })
   },
   methods: {
     get_statistics_data() {
@@ -52,6 +58,14 @@ export default {
     tabClick() {
       this.get_statistics_data();
     },
+    // 验证是否有对应的权限
+    checkPermission(permission) {
+      if (permission === 0) {
+        return true
+      } else {
+        return this.role.includes(permission)
+      }
+    }
   },
 };
 </script>
