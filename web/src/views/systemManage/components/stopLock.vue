@@ -127,7 +127,7 @@ export default {
       })
     },
     formApply(params) {
-      if (params) {
+      if (params === 'switch') {
         this.getApplyMessage()
       } else {
         this.$refs.form.validate(valid => {

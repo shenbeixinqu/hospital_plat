@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     initChart() {
-      var colors = ["#00ffff", "#00cfff", "#ffe000", "#ffa800", "#ff3000"];
+      var colors = ["#00ffff", "#228B22", "#ffe000", "#FF00FF", "#ff3000"];
       const pieData = [];
       this.dataList.forEach((item, index) => {
         pieData.push({

@@ -41,7 +41,11 @@ export default {
   methods: {
     get_statistics_data() {
       statistics_data({ type: this.activeName }).then((res) => {
-        this.statisticsData = res.datas;
+        if (res.datas.status === 200) {
+          this.statisticsData = res.datas;
+        } else {
+          console.log(res.msg)
+        }
       });
     },
     // tab切换，请求后台接口
