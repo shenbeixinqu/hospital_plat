@@ -116,8 +116,16 @@ export default {
         if (valid) {
           try {
             this.loading = true;
-            await this.login(this.form);
-            await this.$router.push(this.handleRoute());
+            const status = await this.login(this.form);
+            if (status === 200) {
+              await this.$router.push(this.handleRoute());
+            } else {
+              this.$message({
+                type: "error",
+                message: "账号或密码错误！"
+              })
+              this.loading = false
+            }
           } finally {
             this.loading = false;
           }

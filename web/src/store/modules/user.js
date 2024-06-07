@@ -72,11 +72,11 @@ const actions = {
    * @param {*} userInfo
    */
   async login({ commit }, userInfo) {
-    console.log("userinfo", userInfo);
     const {
-      datas: { token },
+      datas: { token, status },
     } = await login(userInfo);
-    commit("setToken", token);
+      commit("setToken", token);
+      return status
   },
   /**
    * @description 退出
