@@ -2,6 +2,21 @@
   <div class="role-container">
     <uni-query-form>
       <uni-query-form-left-panel>
+        <el-row :gutter="20">
+          <el-col :span="18">
+            <el-input 
+              size="small"
+              placeholder="请输入用户名"
+              clearable
+              v-model="queryForm.name"
+            />
+          </el-col>
+          <el-col :span="6">
+            <el-button size="small" type="primary" @click="fetchData">搜索</el-button>
+          </el-col>
+        </el-row>
+      </uni-query-form-left-panel>
+      <uni-query-form-left-panel>
         <el-button
           icon="el-icon-plus"
           size="small"
@@ -14,6 +29,7 @@
     <el-table
       :loading="listLoading"
       :data="dataList"
+      :header-cell-style="hederCellStyle"
     >
       <el-table-column label="角色ID" align="center" prop="id" />
       <el-table-column label="角色名称" align="center" prop="name" />
@@ -71,6 +87,10 @@ export default {
       total: 0,
       selectRows: "",
       layout: "total, sizes, prev, pager, next, jumper",
+      hederCellStyle: {
+        backgroundColor: "#f5f7fa",
+        color: "#303133"
+      },
       queryForm: {
         pn: 1,
         limit: 10,

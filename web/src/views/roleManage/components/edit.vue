@@ -5,7 +5,7 @@
     @close="dialogClose"
     width="40%"
   >
-    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="角色名称" prop="name">
         <el-input v-model="form.name" />
       </el-form-item>

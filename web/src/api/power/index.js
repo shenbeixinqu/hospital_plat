@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 export function powerList(params) {
   return request({
-    url: "/powers",
+    url: "/p/powers",
     method: "GET",
     params
   });

@@ -15,7 +15,7 @@
         </div>
         <div class="split-line"></div>
         <div class="page-header-data-part">
-          <div class="page-header-data-yesterday">昨日退号人次</div>
+          <div class="page-header-data-yesterday">昨日患者退号人次</div>
           <div class="page-header-data-number">{{ return_count }}</div>
         </div>
         <div class="split-line"></div>

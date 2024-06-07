@@ -249,6 +249,11 @@ html {
     }
 
     /* el-form表单 */
+    .el-form--label-right {
+      .el-form-item {
+        margin-bottom: 18px;
+      }
+    }
     .el-form--label-top {
       .el-form-item__label {
         padding: 0;

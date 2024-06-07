@@ -3,8 +3,9 @@
     :title="title"
     :visible.sync="dialogFormVisible"
     @close="dialogClose"
+    width="45%"
   >
-    <el-form ref="form" :model="form">
+    <el-form ref="form" :model="form" label-position="right" label-width="120px">
       <el-form-item label="数据权限:">
         <el-radio-group v-model="form.data">
           <el-radio :label="0">仅本人</el-radio>
@@ -16,11 +17,10 @@
       <el-form-item label="功能权限:">
         <el-tree
           ref="tree"
-          style="margin-left: 100px; margin-top: 20px"
+          style="margin-top: 12px"
           :data="powerList"
           show-checkbox
           node-key="id"
-          default-expand-all
           highlight-current
           :default-checked-keys="rolePowerList"
           :props="defaultProps">
@@ -68,7 +68,7 @@ export default {
     },
     // 获取权限信息
     getPowerList() {
-      powerList({ rt: 1 }).then(res => {
+      powerList().then(res => {
         if (res.datas.status === 200) {
           this.powerList = res.datas.datas
         } else {

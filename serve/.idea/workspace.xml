@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="946fdf8a-043b-403e-904e-3cbe887f2349" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web/src/config/net.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/config/net.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/src/api/power/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/api/power/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/src/views/roleManage/components/assign.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/views/roleManage/components/assign.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/src/views/roleManage/components/check.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/views/roleManage/components/check.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/src/views/roleManage/components/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/views/roleManage/components/edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/src/views/roleManage/roleSetting.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web/src/views/roleManage/roleSetting.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +106,7 @@
       <workItem from="1716358188506" duration="14441000" />
       <workItem from="1716770315332" duration="35187000" />
       <workItem from="1717376276169" duration="12546000" />
-      <workItem from="1717570857581" duration="7963000" />
+      <workItem from="1717570857581" duration="9167000" />
     </task>
     <servers />
   </component>
@@ -120,22 +122,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1717572565415" />
-    <state width="1556" height="107" key="GridCell.Tab.0.bottom" timestamp="1717579254007">
+    <state width="1556" height="105" key="GridCell.Tab.0.bottom" timestamp="1717723051758">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1556" height="107" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1717579254007" />
-    <state width="1556" height="107" key="GridCell.Tab.0.center" timestamp="1717579254007">
+    <state width="1556" height="105" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1717723051758" />
+    <state width="1556" height="105" key="GridCell.Tab.0.center" timestamp="1717723051758">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1556" height="107" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1717579254007" />
-    <state width="1556" height="107" key="GridCell.Tab.0.left" timestamp="1717579254007">
+    <state width="1556" height="105" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1717723051758" />
+    <state width="1556" height="105" key="GridCell.Tab.0.left" timestamp="1717723051757">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1556" height="107" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1717579254007" />
-    <state width="1556" height="107" key="GridCell.Tab.0.right" timestamp="1717579254007">
+    <state width="1556" height="105" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1717723051757" />
+    <state width="1556" height="105" key="GridCell.Tab.0.right" timestamp="1717723051758">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1556" height="107" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1717579254007" />
+    <state width="1556" height="105" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1717723051758" />
     <state x="301" y="74" key="SettingsEditor" timestamp="1717633975316">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

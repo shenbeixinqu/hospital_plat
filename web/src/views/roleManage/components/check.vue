@@ -3,22 +3,25 @@
     :title="title"
     :visible.sync="dialogFormVisible"
     @close="dialogClose"
+    width="40%"
   >
-    <el-form ref="form" :model="form">
-      <el-form-item label="角色名称：">
-        <span>{{ form.name }}</span>
+    <el-form ref="form" :model="form" label-position="right" label-width="120px">
+      <el-form-item label="角色名称: ">
+        {{ form.name }}
       </el-form-item>
-      <el-form-item label="创建时间：">
-        <span>{{ form.addtime }}</span>
+      <el-form-item label="创建时间: ">
+        {{ form.addtime }}
       </el-form-item>
-      <el-form-item label="更新时间：">
-        <span>{{ form.uptime }}</span>
+      <el-form-item label="更新时间: ">
+        {{ form.uptime }}
       </el-form-item>
-      <el-form-item label="备注：">
-        <span>{{ form.remark }}</span>
+      <el-form-item label="备注: ">
+        {{ form.remark }}
       </el-form-item>
-      <el-form-item label="权限:">
-        <span>{{ form.powers }}</span>
+      <el-form-item label="权限: ">
+        <template v-for="(item, index) in form.powers" >
+          <el-tag :key="index">{{ item }}</el-tag>
+        </template>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -50,7 +53,7 @@ export default {
     getRolePowerList(id) {
       roleObtain(id).then((res) => {
         if (res.datas.status === 200) {
-          this.form.powers = (Object.values(res.datas.datas.powers)).join(',')
+          this.form.powers = (Object.values(res.datas.datas.powers))
         } else {
           this.$message({
             type: "error",
