@@ -53,13 +53,13 @@ export default {
       resetData: [100, 100, 6],
       rules: {
         admission_count: [
-          { required: true, validator: this.validateIntegerInRangeOne, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeOne, trigger: 'change' }
         ],
         retreat_count: [
-          { required: true, validator: this.validateIntegerInRangeOne, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeOne, trigger: 'change' }
         ],
         department_max_count: [
-          { required: true, validator: this.validateIntegerInRangeFour, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeFour, trigger: 'change' }
         ]
       },
     };

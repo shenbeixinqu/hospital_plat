@@ -52,16 +52,16 @@ export default {
       resetData: [10, 10, 6, 6],
       rules: {
         consultation_count: [
-          { required: true, validator: this.validateIntegerInRangeTen, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeTen, trigger: 'change' }
         ],
         disease_count: [
-          { required: true, validator: this.validateIntegerInRangeTen, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeTen, trigger: 'change' }
         ],
         department_max_count: [
-          { required: true, validator: this.validateIntegerInRangeSix, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeSix, trigger: 'change' }
         ],
         department_min_count: [
-          { required: true, validator: this.validateIntegerInRangeFour, trigger: 'blur' }
+          { required: true, validator: this.validateIntegerInRangeFour, trigger: 'change' }
         ]
       }
     }

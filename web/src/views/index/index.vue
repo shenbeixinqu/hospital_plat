@@ -36,7 +36,25 @@ export default {
         { label: "全院", name: "all", "permission": 10 },
       ],
       activeName: "my",
-      statisticsData: {},
+      statisticsData: {
+        month_repeat_count: 0,
+        month_repeat_count_same: 0,
+        month_repeat_count_ring: 0,
+        year_repeat_count: 0,
+        year_repeat_count_same: 0,
+
+        month_accept_count: 0,
+        month_accept_count_same: 0,
+        month_accept_count_ring: 0,
+        year_accept_count: 0,
+        year_accept_count_same: 0,
+
+        month_drug_income: 0 ,
+        month_drug_income_same: 0,
+        month_drug_income_ring: 0,
+        year_drug_income: 0,
+        year_drug_income_same: 0,
+      },
     };
   },
   computed: {

@@ -107,23 +107,23 @@
 <script>
 import { rank_data } from '@/api/index'
 export default {
-  created() {
-    this.get_rank_data()
-  },
-  filters: {
-    formatNumber(value) {
-      return new Intl.NumberFormat().format(value);
-    }
-  },
   props: {
     statisticsData: {
       type: Object,
       default: () => {}
     }
   },
+  created() {
+    this.get_rank_data()
+  },
   data() {
     return {
       rankData: []
+    }
+  },
+  filters: {
+    formatNumber(value) {
+      return new Intl.NumberFormat().format(value);
     }
   },
   methods: {

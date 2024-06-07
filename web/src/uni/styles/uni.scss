@@ -375,6 +375,9 @@ html {
 
     /* el-table表格 */
     .el-table {
+      .el-table__cell {
+        padding: 6px 0;
+      }
       .el-table__body-wrapper {
         @include base-scrollbar;
       }
