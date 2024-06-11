@@ -46,6 +46,7 @@
       </el-table-column>
     </el-table>
     <!-- 组件 -->
+    <check ref="check" />
     <edit ref="edit" @fetch-data="fetchData" />
 
     <!-- 分页 -->
@@ -64,11 +65,13 @@
 <script>
 import { jobList } from "@/api/job";
 import Edit from "./components/edit.vue"
+import Check from "./components/check.vue"
 
 export default {
   name: "jobManage",
   components: {
     Edit,
+    Check
   },
   created() {
     this.fetchData();
@@ -108,7 +111,9 @@ export default {
       this.queryForm.pn = val;
       this.fetchData();
     },
-    handleCheck(row) {},
+    handleCheck(row) {
+      this.$refs.check.showCheck(row)
+    },
     handleEdit(row) {
       if (row) {
         this.$refs.edit.showEdit(row)

@@ -80,7 +80,7 @@ export default {
               }
             })
           } else {
-            roleEdit(this.form, this.form.id).then(res => {
+            jobEdit(this.form, this.form.id).then(res => {
               if (res.datas.status === 200) {
                 this.$message({
                   type: "success",

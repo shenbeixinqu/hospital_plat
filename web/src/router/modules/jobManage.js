@@ -13,7 +13,7 @@ const jobRouter = {
     {
       path: "JobManage",
       name: "JobManage",
-      component: () => import("@/views/jobManage"),
+      component: () => import("@/views/jobManage/jobSetting"),
       meta: {
         title: "工种管理"
       }
