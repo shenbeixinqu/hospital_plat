@@ -18,7 +18,7 @@
               :style="{ fontSize: chartFontFourteen + 'px'}"
             ></div>
             <div>{{ item.name }}</div>
-            <div>{{ item.radio }}</div>
+            <div>{{ item.radio }}%</div>
           </li>
         </ul>
       </div>
@@ -32,7 +32,7 @@
               :style="{ fontSize: chartFontFourteen + 'px'}"
             ></div>
             <div>{{ item.name }}</div>
-            <div>{{ item.radio }}</div>
+            <div>{{ item.radio }}%</div>
           </li>
         </ul>
       </div>

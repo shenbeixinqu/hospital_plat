@@ -28,11 +28,10 @@ export const asyncRoutes = [
   },
   {
     path: "/",
-    name: "Root",
     component: Layout,
     redirect: "/index",
     meta: {
-      title: "首页",
+      title: "系统首页",
     },
     children: [
       {
@@ -40,7 +39,7 @@ export const asyncRoutes = [
         name: "Index",
         component: () => import("@/views/index"),
         meta: {
-          title: "首页",
+          title: "系统首页", affix: true
         },
       },
     ],
@@ -70,8 +69,8 @@ export function resetRouter(routes = constantRoutes) {
 function createRouter(routes = asyncRoutes) {
   return new VueRouter({
     // base: process.env.BASE_URL,
-    base: publicPath,
-    mode: routerMode,
+    // base: publicPath,
+    // mode: routerMode,
     scrollBehavior: () => ({
       y: 0,
     }),
