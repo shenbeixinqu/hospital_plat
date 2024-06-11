@@ -1,18 +1,20 @@
 <template>
-  <div class="role-container">
+  <div class="job-container">
     <uni-query-form>
       <uni-query-form-left-panel>
         <el-row :gutter="20">
           <el-col :span="18">
-            <el-input 
+            <el-input
               size="small"
-              placeholder="请输入用户名"
+              placeholder="请输入工种名称"
               clearable
               v-model="queryForm.name"
             />
           </el-col>
           <el-col :span="6">
-            <el-button size="small" type="primary" @click="fetchData">搜索</el-button>
+            <el-button size="small" type="primary" @click="fetchData"
+              >搜索</el-button
+            >
           </el-col>
         </el-row>
       </uni-query-form-left-panel>
@@ -31,8 +33,8 @@
       :data="dataList"
       :header-cell-style="hederCellStyle"
     >
-      <el-table-column label="角色ID" align="center" prop="id" />
-      <el-table-column label="角色名称" align="center" prop="name" />
+      <el-table-column label="工种ID" align="center" prop="id" />
+      <el-table-column label="工种名称" align="center" prop="name" />
       <el-table-column label="创建时间" align="center" prop="addtime" />
       <el-table-column label="更新时间" align="center" prop="uptime" />
       <el-table-column label="备注" align="center" prop="remark" />
@@ -40,17 +42,12 @@
         <template #default="{ row }">
           <el-button type="text" @click="handleCheck(row)">查看</el-button>
           <el-button type="text" @click="handleEdit(row)">编辑</el-button>
-          <el-button type="text" @click="handleDel(row)">删除</el-button>
-          <el-button type="text" @click="handleAssign(row)">分配权限</el-button>
         </template>
       </el-table-column>
     </el-table>
-
     <!-- 组件 -->
-    <check ref="check" />
     <edit ref="edit" @fetch-data="fetchData" />
-    <assign ref="assign" />
-    
+
     <!-- 分页 -->
     <el-pagination
       background
@@ -65,48 +62,43 @@
 </template>
 
 <script>
-import { roleList, roleDel } from '@/api/role'
-import Check from './components/check.vue'
-import Edit from './components/edit.vue'
-import Assign from './components/assign.vue'
+import { jobList } from "@/api/job";
+import Edit from "./components/edit.vue"
 
 export default {
-  name: "roleSetting",
+  name: "jobManage",
   components: {
-    Check,
     Edit,
-    Assign
   },
   created() {
-    this.fetchData()
+    this.fetchData();
   },
   data() {
     return {
       dataList: [],
       listLoading: true,
       total: 0,
-      selectRows: "",
       layout: "total, sizes, prev, pager, next, jumper",
       hederCellStyle: {
         backgroundColor: "#f5f7fa",
-        color: "#303133"
+        color: "#303133",
       },
       queryForm: {
         pn: 1,
         limit: 10,
-        name: ""
+        name: "",
       },
-    }
+    };
   },
   methods: {
     async fetchData() {
-      this.listLoading = true
+      this.listLoading = true;
       const {
         datas: { datas, total },
-      } = await roleList(this.queryForm)
-      this.total = total
-      this.dataList = datas
-      this.listLoading = false
+      } = await jobList(this.queryForm);
+      this.total = total;
+      this.dataList = datas;
+      this.listLoading = false;
     },
     handleSizeChange(val) {
       this.queryForm.limit = val;
@@ -116,9 +108,7 @@ export default {
       this.queryForm.pn = val;
       this.fetchData();
     },
-    handleCheck(row) {
-      this.$refs.check.showCheck(row)
-    },
+    handleCheck(row) {},
     handleEdit(row) {
       if (row) {
         this.$refs.edit.showEdit(row)
@@ -126,37 +116,9 @@ export default {
         this.$refs.edit.showEdit()
       }
     },
-    handleDel(row) {
-      this.$confirm("确定要删除当前项吗?", "温馨提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          roleDel(row.id).then(res => {
-            if (res.datas.status === 200) {
-                this.$message({
-                  type: "success",
-                  message: "删除成功",
-                });
-                this.fetchData();
-              }
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        })
-    },
-    handleAssign(row) {
-      this.$refs.assign.showAssign(row)
-    }
-  }
-}
+  },
+};
 </script>
 
 <style>
-
 </style>

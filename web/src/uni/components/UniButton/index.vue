@@ -13,7 +13,7 @@ export default {
     },
     disabledDelay: {
       type: Number,
-      default: 3000 // 按钮禁用的时间，单位为毫秒
+      default: 1000 // 按钮禁用的时间，单位为毫秒
     },
     type: {
       type: String,

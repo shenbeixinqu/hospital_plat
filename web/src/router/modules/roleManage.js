@@ -5,13 +5,14 @@ const roleRouter = {
   name: "roleManage",
   component: Layout,
   meta: {
-    title: "角色管理"
+    title: "角色管理",
+    levelHidden: true,
   },
   children: [
     {
       path: "RoleSetting",
       name: "RoleSetting",
-      component: () => import("@/views/roleManage/roleSetting"),
+      component: () => import("@/views/roleManage"),
       meta: {
         title: "角色管理"
       }
