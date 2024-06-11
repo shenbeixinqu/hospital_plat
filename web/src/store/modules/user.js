@@ -8,7 +8,7 @@ const state = () => ({
   username: "",
   dep_name: "",
   role_name: "",
-  userid: "5",
+  userid: "",
   avatar: "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
 });
 
@@ -38,6 +38,14 @@ const mutations = {
    */
   setUsername(state, username) {
     state.username = username;
+  },
+  /**
+   * @description 设置用户id
+   * @param {*} state
+   * @param {*} userid
+   */
+  setUserid(state, userid) {
+    state.userid = userid
   },
   /**
    * @description 设置头像
@@ -93,7 +101,7 @@ const actions = {
   async getUserInfo({ commit, dispatch }) {
     const searchData = { token_value: localStorage.getItem("pro-token") };
     const {
-      datas: { name, menu, dep_name, role_name, ability, avatar },
+      datas: { name, id, menu, dep_name, role_name, ability, avatar },
     } = await getRoleInfo(searchData);
     // 检查返回数据是否正确 无对应参数 使用默认值
     if (
@@ -107,6 +115,7 @@ const actions = {
     } else {
       localStorage.setItem("pro-token", `${name}-token`);
       if (name) commit("setUsername", name);
+      if (id) commit("setUserid", id);
       if (avatar) commit("setAvatar", avatar);
       if (dep_name) commit("setDepName", dep_name);
       if (role_name) commit("setRoleName", role_name);
@@ -124,7 +133,13 @@ const actions = {
       "setAvatar",
       "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif"
     );
+    commit('routes/setRoutes', [], { root: true })
+
     await dispatch("setToken", "");
+    await dispatch('acl/setFull', false, { root: true })
+    await dispatch('acl/setRole', [], { root: true })
+    await dispatch('acl/setAbility', [], { root: true })
+    await dispatch('tabs/delAllVisitedRoutes', null, { root: true })
     await resetRouter();
     removeToken();
   },

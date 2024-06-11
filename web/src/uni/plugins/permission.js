@@ -14,12 +14,17 @@ router.beforeEach(async (to, from, next) => {
         next();
       }
     } else {
-      if (loginInterception) {
-        await store.dispatch("user/getUserInfo");
+      try {
+        if (loginInterception) {
+          await store.dispatch("user/getUserInfo");
+        }
+        // 根据路由模式获取路由 并 根据权限过滤
+        await store.dispatch("routes/setRoutes", authentication);
+        next({ ...to, replace: true });
+      } catch (err) {
+        await store.dispatch('user/resetAll')
+        next(toLoginRoute(to.path))
       }
-      // 根据路由模式获取路由 并 根据权限过滤
-      await store.dispatch("routes/setRoutes", authentication);
-      next({ ...to, replace: true });
     }
   } else {
     if (routesWhiteList.includes(to.path)) {

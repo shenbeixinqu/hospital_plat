@@ -9,6 +9,13 @@ Vue.use(VueRouter);
 
 export const constantRoutes = [
   {
+    path: "/login",
+    component: () => import("@/views/login"),
+    meta: {
+      hidden: true,
+    },
+  },
+  {
     path: "/403",
     name: "403",
     component: () => import("@/views/403"),
@@ -19,13 +26,6 @@ export const constantRoutes = [
 ];
 
 export const asyncRoutes = [
-  {
-    path: "/login",
-    component: () => import("@/views/login"),
-    meta: {
-      hidden: true,
-    },
-  },
   {
     path: "/",
     component: Layout,
@@ -66,7 +66,7 @@ export function resetRouter(routes = constantRoutes) {
   router.matcher = createRouter(routes).matcher;
 }
 
-function createRouter(routes = asyncRoutes) {
+function createRouter(routes = constantRoutes) {
   return new VueRouter({
     // base: process.env.BASE_URL,
     // base: publicPath,
