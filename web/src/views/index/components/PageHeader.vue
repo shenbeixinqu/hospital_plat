@@ -61,13 +61,14 @@ export default {
     ...mapGetters({
       avatar: "user/avatar",
       username: "user/username",
+      userid: "user/userid",
       dep_name: "user/dep_name",
       role_name: "user/role_name"
     }),
   },
   methods: {
     get_header_data() {
-      header_data({ user_id: "1" }).then(res => {
+      header_data({ user_id: this.userid }).then(res => {
         this.registered_count = res.datas.registered_count
         this.return_count = res.datas.return_count
         this.admission_count = res.datas.admission_count
