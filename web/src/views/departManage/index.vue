@@ -17,6 +17,16 @@
           <el-col :span="6">
             <div class="text-content">请选择上级组织:</div>
           </el-col>
+          <el-col :span="12">
+            <el-select v-model="queryForm.pid" filterable placeholder="请选择" size="small">
+              <el-option
+                v-for="item in departSelectData"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-col>
           <el-col :span="3">
             <el-button size="small" type="primary" @click="fetchData"
               >搜索</el-button
@@ -75,7 +85,7 @@
 </template>
 
 <script>
-import { departList } from "@/api/depart";
+import { departList, departSelect, departDel } from "@/api/depart";
 import Edit from './componets/edit.vue'
 import Check from './componets/check.vue'
 
@@ -87,10 +97,12 @@ export default {
   },
   created() {
     this.fetchData();
+    this.fetchSelectData()
   },
   data() {
     return {
       dataList: [],
+      departSelectData: [],
       listLoading: true,
       total: 0,
       layout: "total, sizes, prev, pager, next, jumper",
@@ -102,6 +114,7 @@ export default {
         pn: 1,
         limit: 10,
         name: "",
+        pid: null,
       },
     };
   },
@@ -114,6 +127,11 @@ export default {
       this.total = total;
       this.dataList = datas;
       this.listLoading = false;
+      this.fetchSelectData()
+    },
+    async fetchSelectData() {
+      const { datas: { datas }} = await departSelect()
+      this.departSelectData = datas
     },
     handleSizeChange(val) {
       this.queryForm.limit = val;
@@ -128,9 +146,9 @@ export default {
     },
     handleEdit(row) {
       if (row) {
-        this.$refs.edit.showEdit(row);
+        this.$refs.edit.showEdit(this.departSelectData, row);
       } else {
-        this.$refs.edit.showEdit();
+        this.$refs.edit.showEdit(this.departSelectData);
       }
     },
     handleDel(row) {
