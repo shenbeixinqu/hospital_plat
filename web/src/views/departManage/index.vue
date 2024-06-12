@@ -18,7 +18,7 @@
             <div class="text-content">请选择上级组织:</div>
           </el-col>
           <el-col :span="12">
-            <el-select v-model="queryForm.pid" filterable placeholder="请选择" size="small">
+            <el-select v-model="queryForm.pid" clearable filterable placeholder="请选择" size="small">
               <el-option
                 v-for="item in departSelectData"
                 :key="item.id"
@@ -114,7 +114,7 @@ export default {
         pn: 1,
         limit: 10,
         name: "",
-        pid: null,
+        pid: "",
       },
     };
   },
