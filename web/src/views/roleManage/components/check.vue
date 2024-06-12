@@ -34,9 +34,9 @@
 import { roleObtain } from "@/api/role";
 
 export default {
+  name: "roleCheck",
   data() {
     return {
-      name: "roleCheck",
       title: "角色查看",
       form: {},
       dialogFormVisible: false,

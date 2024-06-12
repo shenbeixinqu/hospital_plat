@@ -39,6 +39,7 @@ import { roleObtain, roleAssign } from '@/api/role'
 import { powerList } from '@/api/power'
 
 export default {
+  name: "roleAssign",
   data() {
     return {
       title: "分配权限",

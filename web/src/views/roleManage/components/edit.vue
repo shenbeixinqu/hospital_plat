@@ -26,7 +26,6 @@ import { roleAdd, roleEdit } from '@/api/role'
 export default {
   data() {
     return {
-      name: "roleEdit",
       title: "",
       handle_type: "",
       dialogFormVisible: false,

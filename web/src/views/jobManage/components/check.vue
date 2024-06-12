@@ -27,9 +27,9 @@
 
 <script>
 export default {
+  name: "jobCheck",
   data() {
     return {
-      name: "jobCheck",
       title: "工种查看",
       form: {},
       dialogFormVisible: false,

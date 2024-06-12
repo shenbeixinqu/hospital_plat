@@ -24,9 +24,9 @@
 import { jobAdd, jobEdit } from '@/api/job'
 
 export default {
+  name: "jobEdit",
   data() {
     return {
-      name: "jobEdit",
       title: "",
       handle_type: "",
       dialogFormVisible: false,
