@@ -146,6 +146,7 @@ export default {
     },
     handleEdit(row) {
       if (row) {
+        row.pid = row.parentId.toString()
         this.$refs.edit.showEdit(this.departSelectData, row);
       } else {
         this.$refs.edit.showEdit(this.departSelectData);

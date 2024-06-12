@@ -10,12 +10,7 @@
         <el-input clearable v-model="form.name" />
       </el-form-item>
       <el-form-item label="上级组织:">
-        <el-select
-          v-model="form.pid"
-          filterable
-          clearable
-          placeholder="请选择"
-        >
+        <el-select v-model="form.pid" filterable clearable placeholder="请选择">
           <el-option
             v-for="item in departSelectData"
             :key="item.id"
@@ -62,7 +57,7 @@ export default {
   },
   methods: {
     showEdit(departSelectData, row) {
-      this.departSelectData =  JSON.parse(JSON.stringify(departSelectData))
+      this.departSelectData = JSON.parse(JSON.stringify(departSelectData));
       if (!row) {
         this.title = "添加组织";
         this.handle_type = "1";
@@ -70,7 +65,7 @@ export default {
         this.title = "编辑组织";
         this.handle_type = "2";
         this.form = Object.assign({}, row);
-        this.departSelectData = this.addRequired(this.departSelectData, row.id)
+        this.departSelectData = this.addRequired(this.departSelectData, row.id);
       }
       this.dialogFormVisible = true;
     },
@@ -82,44 +77,59 @@ export default {
     },
     // 递归处理组织下拉
     addRequired(data, targetId) {
-      data.forEach(item => {
+      data.forEach((item) => {
         if (item.id.toString() === targetId.toString()) {
           item.disabled = true
         }
         if (item.parentId.toString() === targetId.toString()) {
-          item.disabled = true
-          this.addRequired(data, item.id)
+          item.disabled = true;
+          this.addRequired(data, item.id);
         } else {
-          return
+          return;
         }
-      })
-      return data
+      });
+      return data;
     },
     handleSubmit() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          if (this.handle_type === '1') {
-            departAdd(this.form).then(res => {
+          if (this.handle_type === "1") {
+            departAdd(this.form).then((res) => {
               if (res.datas.status === 200) {
                 this.$message({
                   type: "success",
                   message: `${this.title}成功`,
                 });
                 this.$emit("fetch-data");
-                this.dialogClose()
+                this.dialogClose();
               } else {
                 this.$message({
                   type: "error",
                   message: res.msg,
                 });
               }
-            })
+            });
+          } else {
+            departEdit(this.form, this.form.id).then((res) => {
+              if (res.datas.status === 200) {
+                this.$message({
+                  type: "success",
+                  message: `${this.title}成功`,
+                });
+                this.$emit("fetch-data");
+                this.dialogClose();
+              } else {
+                this.$message({
+                  type: "error",
+                  message: res.msg,
+                });
+              }
+            });
           }
         }
-      })
+      });
     },
   },
-  
 };
 </script>
 
