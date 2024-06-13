@@ -10,13 +10,21 @@ const departRouter = {
   },
   children: [
     {
-      path: "departSetting",
-      name: "departSetting",
+      path: "DepartSetting",
+      name: "DepartSetting",
       component: () => import("@/views/departManage"),
       meta: {
         title: "组织管理"
       }
-    }
+    },
+    {
+      path: "departTree",
+      name: "departTree",
+      component: () => import("@/views/departManage/departTree"),
+      meta: {
+        title: "组织架构图"
+      }
+    },
   ]
 }
 

@@ -5,8 +5,9 @@ import systemRouter from './modules/systemManage'
 import screenRouter from "./modules/screen";
 import roleRouter from './modules/roleManage'
 import jobRouter from "./modules/jobManage";
-import { publicPath, routerMode } from "@/config";
 import departRouter from "./modules/departManage";
+import usersRouter from "./modules/userManage";
+import { publicPath, routerMode } from "@/config";
 Vue.use(VueRouter);
 
 export const constantRoutes = [
@@ -51,6 +52,7 @@ export const asyncRoutes = [
   departRouter,
   roleRouter,
   jobRouter,
+  usersRouter,
   screenRouter
 ];
 
